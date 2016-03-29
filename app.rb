@@ -11,7 +11,7 @@ end
 ['/about', '/contact', '/portfolio'].each do |path|
 	get path do
 		@current_path = path.delete('/')
-    @images_dir = "http://s3.amazonaws.com/#{ENV['AWS_S3_BUCKET']}"
+    @images_dir = "http://s3.amazonaws.com/#{ENV['AWS_BUCKET_NAME']}"
 		erb @current_path.to_sym
 	end
 end
