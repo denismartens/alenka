@@ -1,8 +1,14 @@
 require 'sinatra'
 require 'pony'
 require 'dotenv'
+require 'aws/s3'
 
 Dotenv.load
+
+AWS::S3::Base.establish_connection!(
+  :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+  :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+)
 
 get '/' do
 	erb :index
@@ -11,7 +17,10 @@ end
 ['/about', '/contact', '/portfolio'].each do |path|
 	get path do
 		@current_path = path.delete('/')
-    @images_dir = "http://s3.amazonaws.com/#{ENV['AWS_BUCKET_NAME']}"
+    if @current_path == 'portfolio'
+      @images_dir = "http://s3.amazonaws.com/#{ENV['AWS_BUCKET_NAME']}"
+      @images = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME']).objects
+    end
 		erb @current_path.to_sym
 	end
 end

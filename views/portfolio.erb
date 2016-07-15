@@ -1,62 +1,9 @@
 <div class="row small-up-2 medium-up-3 large-up-4 content">
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-vertical-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-vertical-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-square-image.png')%>>
-		</a>
-	</div>
-	<div class="column portfolio-item">
-		<a class="thumbnail" role="button" href=<%=File.join(@images_dir, 'sample-full-size-image.png')%>>
-			<img src=<%=File.join(@images_dir, 'sample-vertical-image.png')%>>
-		</a>
-	</div>
+	<% @images.each do |image| %>
+		<div class="column portfolio-item">
+			<a class="thumbnail" role="button" href=<%= File.join(@images_dir, image.key) %>>
+				<img src=<%= File.join(@images_dir, image.key) %>>
+			</a>
+		</div>
+	<% end %>
 </div>

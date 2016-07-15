@@ -1,6 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aws-s3 (0.6.3)
+      builder
+      mime-types
+      xml-simple
+    builder (3.2.2)
     daemons (1.2.3)
     dotenv (2.1.0)
     eventmachine (1.0.9.1)
@@ -21,15 +26,20 @@ GEM
       eventmachine (~> 1.0, >= 1.0.4)
       rack (~> 1.0)
     tilt (2.0.2)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-s3
   dotenv
   pony
   sinatra
   thin
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.5

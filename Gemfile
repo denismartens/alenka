@@ -8,3 +8,5 @@ gem 'thin'
 gem 'pony'
 
 gem 'dotenv'
+
+gem 'aws-s3'
