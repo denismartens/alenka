@@ -4,17 +4,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alena Pastushonak Photography</title>
+    <title>Alena P. Photographer</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
 
   <header class="header">
-    <h1 class="main-header">
-      <a href="/" class="brand">Alena Pastushonak Photography</a>
-    </h1>
-    <ul class="header-subnav">
+    <a href="/" class="brand small-12 medium-12 large-5">Alena Pastushonak<label>Photographer</label></a>
+    <ul class="header-subnav small-12 medium-12">
       <li><a href="/portfolio" class="<%= 'is-active' if @current_path == 'portfolio'%>">Portfolio</a></li>
       <li><a href="/about" class="<%= 'is-active' if @current_path == 'about'%>">About</a></li>
       <li><a href="/contact" class="<%= 'is-active' if @current_path == 'contact'%>">Contact</a></li>
@@ -22,6 +20,8 @@
   </header>
   <div class="off-canvas-content" data-off-canvas-content>
     <div class="row column">
+      <br>
       <%= yield %>
     </div>
   </div>
+  </body>

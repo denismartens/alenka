@@ -1,9 +1,22 @@
-<div class="row small-up-2 medium-up-3 large-up-4 content">
-	<% @images.each do |image| %>
-		<div class="column portfolio-item">
-			<a class="thumbnail" role="button" href=<%= File.join(@images_dir, image.key) %>>
+<script src='js/imagesloaded.pkgd.min.js'></script>
+<script src='js/masonry.pkgd.min.js'></script>
+<script>
+	window.onload = function() {
+		var grid = document.querySelector('.grid');
+		imagesLoaded( grid, function() {
+			console.log('images loaded')
+		  new Masonry( grid, {
+		    itemSelector: '.grid-item',
+		    fitWidth: true,
+		    containerStyle: { position: 'relative', visibility: 'visible' }
+		  });
+		});
+	}
+</script>
+<div class="grid" style="visibility: hidden; margin: 0 auto;">
+	<% (@images).shuffle.each do |image| %>
+  	<a class="grid-item" role="button" href=<%= File.join(@images_dir, image.key) %>>
 				<img src=<%= File.join(@images_dir, image.key) %>>
-			</a>
-		</div>
+  	</a>
 	<% end %>
 </div>

@@ -3253,6 +3253,8 @@ table.hover tr:nth-of-type(even):hover {
   border: solid 4px #fefefe;
   box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
   display: inline-block;
+  width: 250px;
+  height: auto;
   line-height: 0;
   max-width: 100%;
   transition: box-shadow 200ms ease-out;

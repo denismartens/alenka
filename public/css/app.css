@@ -2,50 +2,68 @@
   text-align: center;
   background-color: #292c2f;
   background-size: cover;
-  padding: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.5rem;
 }
-.header .main-header .brand {
+.header .brand {
   color: #B1F2EF;
+  font-size: 1.8rem;
+  float: left;
+  margin-left: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  line-height: normal;
+  font-family: 'Times New Roman';
 }
-
-.main-header {
-  margin-bottom: 0rem;
+.header a label {
+  font-size: 0.875rem;
+  color: #B1F2EF;
+  line-height: normal
 }
-
 .header-subnav {
   float: none;
   position: relative;
-  top: 1rem;
   text-align: center;
-  margin-bottom: 0;
+  font-family: 'Times New Roman';
+  margin-bottom: 0px;
 }
 .header-subnav li {
   float: none;
   display: inline-block;
 }
 .header-subnav li a {
+  margin-top: 0.25rem;
   padding: 0.9rem 1rem 0.75rem;
   font-size: 0.875rem;
   color: #fff;
   text-transform: uppercase;
-  display: block;
+  display: inline-block;
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  line-height: normal;
 }
 .header-subnav li a.is-active {
   background: rgba(177, 242, 239, 0.7);
+  padding: 0.5rem;
   color: #333;
 }
 .header-subnav li a:hover {
   background: rgba(177, 242, 239, 0.7);
+  padding: 0.5rem;
   color: #333;
   transition: all .25s ease-in-out;
 }
 .content {
   padding: 1rem;
 }
-.portfolio-item {
-  padding: 2rem 1rem;
+.grid-item {
+  display: block;
+  width: 250px;
+  height: auto;
+  padding: 0.35rem;
+}
+a img:hover {
+  border: 1px solid grey;
 }
 .alert-box.success {
   background-color: #43AC6A;
