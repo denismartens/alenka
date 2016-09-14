@@ -11,10 +11,10 @@ AWS::S3::Base.establish_connection!(
 )
 
 get '/' do
-	erb :index
+  redirect to('/portfolio')
 end
 
-['/contact', '/portfolio'].each do |path|
+['/', '/contact', '/portfolio'].each do |path|
 	get path do
 		@current_path = path.delete('/')
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])

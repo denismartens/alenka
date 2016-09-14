@@ -1,14 +1,15 @@
-<div class="grid" style="margin: 0 auto; position: relative; visibility: hidden;">
+<div class="grid" style="margin: 0 auto; position: relative;">
 	<%= erb :images, :layout => false %>
 </div>
 <script>
 	// layout Masonry after all images load
 	var $grid = $('.grid').imagesLoaded().done( function() {
+		$('.grid-item').css('visibility', 'visible');
 		// init Masonry
 		$grid.masonry({
 		  itemSelector: '.grid-item',
 		  fitWidth: true,
-		  containerStyle: { visibility: 'visible' }
+		  transitionDuration: '0.7s'
 		});
 	});
 	$(window).scroll(function() {
@@ -24,6 +25,7 @@
 						$grid.append( $new_content );
 						// layout Masonry after all new images load
 						$grid.imagesLoaded().done( function() {
+							$('.grid-item').css('visibility', 'visible');
 						  $grid.masonry( 'appended', $new_content );
 						});
 					}
