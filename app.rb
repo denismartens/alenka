@@ -14,14 +14,18 @@ get '/' do
 	erb :index
 end
 
-['/about', '/contact', '/portfolio'].each do |path|
+['/contact', '/portfolio'].each do |path|
 	get path do
 		@current_path = path.delete('/')
+    bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
+    @images_dir = "http://s3.amazonaws.com/#{bucket.name}"
     if @current_path == 'portfolio'
-      @images_dir = "http://s3.amazonaws.com/#{ENV['AWS_BUCKET_NAME']}"
-      @images = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME']).objects
+      @images = bucket.objects(:max_keys => 15, :prefix => 'portfolio', :marker => params[:marker] || 'portfolio/').map(&:key)
+      request.xhr? ? (erb :images, :layout => false) : (erb :portfolio)
+    elsif @current_path == 'contact'
+      @image = "headshot.jpg"
+      erb :contact
     end
-		erb @current_path.to_sym
 	end
 end
 
@@ -38,7 +42,7 @@ post '/contact' do
       :via => :smtp,
 	    :via_options => { 
 	      :address              => 'smtp.sendgrid.net', 
-        :port                 => '587',  
+        :port                 => '587',
 	      :domain               => 'heroku.com',
         :user_name            => ENV['SENDGRID_USERNAME'], 
         :password             => ENV['SENDGRID_PASSWORD'], 

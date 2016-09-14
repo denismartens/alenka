@@ -7,6 +7,9 @@
     <title>Alena P. Photographer</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css" />
+    <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
   </head>
   <body>
 
@@ -14,7 +17,6 @@
     <a href="/" class="brand small-12 medium-12 large-5">Alena Pastushonak<label>Photographer</label></a>
     <ul class="header-subnav small-12 medium-12 large-4 small-centered medium-centered large-offset-3">
       <li><a href="/portfolio" class="<%= 'is-active' if @current_path == 'portfolio'%>">Portfolio</a></li>
-      <li><a href="/about" class="<%= 'is-active' if @current_path == 'about'%>">About</a></li>
       <li><a href="/contact" class="<%= 'is-active' if @current_path == 'contact'%>">Contact</a></li>
     </ul>
   </header>
