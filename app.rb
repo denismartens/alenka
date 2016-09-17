@@ -18,12 +18,12 @@ end
 	get path do
 		@current_path = path.delete('/')
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
-    @images_dir = "http://s3.amazonaws.com/#{bucket.name}"
+    images_dir = "http://s3.amazonaws.com/#{bucket.name}"
     if @current_path == 'portfolio'
-      @images = bucket.objects(:max_keys => 15, :prefix => 'portfolio', :marker => params[:marker] || 'portfolio/').map(&:key)
+      @images = bucket.objects(:max_keys => 15, :prefix => 'portfolio/thumbnail_', :marker => params[:marker] || 'portfolio/').map{|x| File.join(images_dir, x.key)}
       request.xhr? ? (erb :images, :layout => false) : (erb :portfolio)
     elsif @current_path == 'contact'
-      @image = "headshot.jpg"
+      @image = File.join(images_dir, 'headshot.jpg')
       erb :contact
     end
 	end

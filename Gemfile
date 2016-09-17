@@ -10,3 +10,5 @@ gem 'pony'
 gem 'dotenv'
 
 gem 'aws-s3'
+
+gem 'mini_magick'

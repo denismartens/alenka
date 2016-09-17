@@ -7,28 +7,29 @@
 		<% end %>
   	<a href="/contact" class="close">&times;</a>
 	</div>
+<% else %>
+	<div class="medium-6 columns content">
+		<br />
+		<img class="thumbnail" src=<%= @image %>>
+	<!-- 	<div class="medium-2 columns medium-centered">
+			<p>About me:</p>
+			<ul class="menu">
+				<li><a href="https://www.flickr.com/photos/135383235@N03">Flickr</a></li>
+			</ul>
+		</div> -->
+	</div>
+	<div class="medium-6 columns content">
+		<form action="/contact" method="post">
+			<label for="name">Name
+			<input type="text" name="name" placeholder="Name">
+			</label>
+			<label for="email">Email
+			<input type="text" name="email" placeholder="Email">
+			</label>
+			<label>Message
+			<textarea name="message" placeholder="Say hello!" style="height: 12rem;"></textarea>
+			</label for="message">
+			<button type="submit" class="button expanded" value="Send">Submit</button>
+		</form>
+	</div>
 <% end %>
-<div class="medium-6 columns content">
-	<br />
-	<img class="thumbnail" src=<%= File.join(@images_dir, @image) %>>
-<!-- 	<div class="medium-2 columns medium-centered">
-		<p>About me:</p>
-		<ul class="menu">
-			<li><a href="https://www.flickr.com/photos/135383235@N03">Flickr</a></li>
-		</ul>
-	</div> -->
-</div>
-<div class="medium-6 columns content">
-	<form action="/contact" method="post">
-		<label for="name">Name
-		<input type="text" name="name" placeholder="Name">
-		</label>
-		<label for="email">Email
-		<input type="text" name="email" placeholder="Email">
-		</label>
-		<label>Message
-		<textarea name="message" placeholder="Say hello!" style="height: 12rem;"></textarea>
-		</label for="message">
-		<button type="submit" class="button expanded" value="Send">Submit</button>
-	</form>
-</div>

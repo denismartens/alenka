@@ -1,5 +1,5 @@
 <% @images.each do |image| %>
-	<a class="grid-item" role="button" style="visibility: hidden" href=<%= File.join(@images_dir, image) %>>
-			<img src=<%= File.join(@images_dir, image) %>>
+	<a class="grid-item" role="button" style="visibility: hidden" href=<%= image.gsub('thumbnail_','') %>>
+			<img src=<%= image %>>
 	</a>
 <% end %>
