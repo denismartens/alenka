@@ -9,6 +9,7 @@
 		$grid.masonry({
 		  itemSelector: '.grid-item',
 		  fitWidth: true,
+		  columnWidth: 350,
 		  transitionDuration: '0.7s'
 		});
 	});
@@ -16,9 +17,9 @@
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
 			$.ajax({
 				type: 'GET',
-				url: '/portfolio',
+				url: '/portraits',
 				dataType: 'html',
-				data: {marker: $('.grid-item > img').last().attr('src').match(/portfolio\/thumbnail_.*$/)[0]},
+				data: {marker: $('.grid-item > img').last().attr('src').match(/portraits\/thumbnail_.*$/)[0]},
 				success: function(data) {
 					if(!data.trim() == '') {
 						var $new_content = $( data );

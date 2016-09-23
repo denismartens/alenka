@@ -11,17 +11,17 @@ AWS::S3::Base.establish_connection!(
 )
 
 get '/' do
-  redirect to('/portfolio')
+  redirect to('/portraits')
 end
 
-['/', '/contact', '/portfolio'].each do |path|
+['/', '/contact', '/portraits'].each do |path|
 	get path do
 		@current_path = path.delete('/')
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
     images_dir = "http://s3.amazonaws.com/#{bucket.name}"
-    if @current_path == 'portfolio'
-      @images = bucket.objects(:max_keys => 15, :prefix => 'portfolio/thumbnail_', :marker => params[:marker] || 'portfolio/').map{|x| File.join(images_dir, x.key)}
-      request.xhr? ? (erb :images, :layout => false) : (erb :portfolio)
+    if @current_path == 'portraits'
+      @images = bucket.objects(:max_keys => 20, :prefix => 'portraits/thumbnail_', :marker => params[:marker] || 'portraits/').map{|x| File.join(images_dir, x.key)}
+      request.xhr? ? (erb :images, :layout => false) : (erb :portraits)
     elsif @current_path == 'contact'
       @image = File.join(images_dir, 'headshot.jpg')
       erb :contact
