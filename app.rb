@@ -14,14 +14,15 @@ get '/' do
   redirect to('/portraits')
 end
 
-['/', '/contact', '/portraits'].each do |path|
+['/', '/contact', '/portraits', '/weddings'].each do |path|
 	get path do
 		@current_path = path.delete('/')
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
     images_dir = "http://s3.amazonaws.com/#{bucket.name}"
-    if @current_path == 'portraits'
-      @images = bucket.objects(:max_keys => 20, :prefix => 'portraits/thumbnail_', :marker => params[:marker] || 'portraits/').map{|x| File.join(images_dir, x.key)}
-      request.xhr? ? (erb :images, :layout => false) : (erb :portraits)
+    if @current_path == 'portraits' || @current_path == 'weddings'
+      logger.info params[:marker]
+      @images = bucket.objects(:max_keys => 15, :prefix => "#{@current_path}/thumbnail_", :marker => "#{@current_path}/#{params[:marker]}").map{|x| File.join(images_dir, x.key)}
+      request.xhr? ? (erb :images, :layout => false) : (erb :images_grid)
     elsif @current_path == 'contact'
       @image = File.join(images_dir, 'headshot.jpg')
       erb :contact

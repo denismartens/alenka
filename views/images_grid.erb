@@ -17,9 +17,9 @@
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
 			$.ajax({
 				type: 'GET',
-				url: '/portraits',
+				url: window.location.pathname,
 				dataType: 'html',
-				data: {marker: $('.grid-item > img').last().attr('src').match(/portraits\/thumbnail_.*$/)[0]},
+				data: {marker: $('.grid-item > img').last().attr('src').match(RegExp('thumbnail_.*$'))[0]},
 				success: function(data) {
 					if(!data.trim() == '') {
 						var $new_content = $( data );
