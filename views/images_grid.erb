@@ -1,7 +1,28 @@
-<div class="grid" style="margin: 0 auto; position: relative;">
+<div class='grid' style="margin: 0 auto; position: relative;">
 	<%= erb :images, :layout => false %>
 </div>
-<script>
+<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div id="carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+			    <% @images.each do |image| %>
+			      <div class="item">
+			        <img class="img-responsive" src=<%= image.gsub('thumbnail_','') %>>
+			      </div>
+			    <% end %>
+		    </div>
+			  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left"></span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right"></span>
+			  </a>
+		  </div>
+	  </div>
+  </div>
+</div>
+<script type='text/javascript'>
 	// layout Masonry after all images load
 	var $grid = $('.grid').imagesLoaded().done( function() {
 		$('.grid-item').css('visibility', 'visible');
@@ -13,6 +34,21 @@
 		  transitionDuration: '0.7s'
 		});
 	});
+	var $carousel = $('#carousel');
+	$('.grid-item > img').on('click', function(e) {
+		var $current_img_src = $(this).attr('src').replace('thumbnail_','');
+		$("img[src='"+$current_img_src+"']").eq(0).parent().addClass('active');
+		$('.modal').modal('show');
+	})
+	$('.modal').on('hidden.bs.modal', function (e) {
+		$carousel.carousel('pause');
+  	$('.item.active').eq(0).removeClass('active');
+	})
+	$carousel.on('slid.bs.carousel', function () {
+		if($carousel.find('.item').length - 1 == $carousel.find('.item.active').index()) {
+			// TO DO: load new images
+		}
+	})
 	$(window).scroll(function() {
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
 			$.ajax({

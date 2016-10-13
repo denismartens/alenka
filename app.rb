@@ -14,20 +14,28 @@ get '/' do
   redirect to('/portraits')
 end
 
-['/', '/contact', '/portraits', '/weddings'].each do |path|
+['/', '/contact', '/portraits', '/portraits/slideshow', '/weddings', '/weddings/slideshow'].each do |path|
 	get path do
-		@current_path = path.delete('/')
+		@current_path = path
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
-    images_dir = "http://s3.amazonaws.com/#{bucket.name}"
-    if @current_path == 'portraits' || @current_path == 'weddings'
-      logger.info params[:marker]
-      @images = bucket.objects(:max_keys => 15, :prefix => "#{@current_path}/thumbnail_", :marker => "#{@current_path}/#{params[:marker]}").map{|x| File.join(images_dir, x.key)}
+    bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
+    folder = @current_path.match(/portraits|weddings/).to_s
+    if @current_path == '/portraits' || @current_path == '/weddings'
+      @images = bucket.objects(:max_keys => 15, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, :layout => false) : (erb :images_grid)
-    elsif @current_path == 'contact'
-      @image = File.join(images_dir, 'headshot.jpg')
+    elsif @current_path == '/portraits/slideshow' || @current_path == '/weddings/slideshow'
+      @current_image = params[:image]
+      @images = bucket.objects(:prefix => "#{folder}/", :marker => "#{folder}/").reject{|img| img.key.include?('thumbnail') || img.key.include?(File.basename(params[:image]))}.map{|img| File.join(bucket_url, img.key)}
+      erb :testing
+    elsif @current_path == '/contact'
+      @image = File.join(bucket_url, 'headshot.jpg')
       erb :contact
     end
 	end
+end
+
+get '/testing' do
+  erb :testing
 end
 
 post '/contact' do 
@@ -51,8 +59,10 @@ post '/contact' do
         :enable_starttls_auto => true
 	    }
     )
-    erb :contact, :locals => {:notice => 'success'}
+    logger.info('success')
+    erb :alert, :locals => {:notice => 'success'}, :layout => false
   rescue
-    erb :contact, :locals => {:notice => 'failure'}
+    logger.info('failure')
+    erb :alert, :locals => {:notice => 'failure'}, :layout => false
   end
 end
