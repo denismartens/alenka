@@ -14,7 +14,7 @@ get '/' do
   redirect to('/portraits')
 end
 
-['/', '/contact', '/portraits', '/portraits/slideshow', '/weddings', '/weddings/slideshow'].each do |path|
+['/', '/contact', '/portraits', '/weddings'].each do |path|
 	get path do
 		@current_path = path
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
@@ -22,11 +22,7 @@ end
     folder = @current_path.match(/portraits|weddings/).to_s
     if @current_path == '/portraits' || @current_path == '/weddings'
       @images = bucket.objects(:max_keys => 15, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
-      request.xhr? ? (erb :images, :layout => false) : (erb :images_grid)
-    elsif @current_path == '/portraits/slideshow' || @current_path == '/weddings/slideshow'
-      @current_image = params[:image]
-      @images = bucket.objects(:prefix => "#{folder}/", :marker => "#{folder}/").reject{|img| img.key.include?('thumbnail') || img.key.include?(File.basename(params[:image]))}.map{|img| File.join(bucket_url, img.key)}
-      erb :testing
+      request.xhr? ? (erb :images, :locals => {:type => params[:type].to_sym}, :layout => false) : (erb :images_grid)
     elsif @current_path == '/contact'
       @image = File.join(bucket_url, 'headshot.jpg')
       erb :contact

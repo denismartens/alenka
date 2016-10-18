@@ -1,16 +1,12 @@
 <div class='grid' style="margin: 0 auto; position: relative;">
-	<%= erb :images, :layout => false %>
+	<%= erb :images, :locals => {:type => :grid}, :layout => false %>
 </div>
 <div class="modal fade bs-modal-lg" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div id="carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
-			    <% @images.each do |image| %>
-			      <div class="item">
-			        <img class="img-responsive" src=<%= image.gsub('thumbnail_','') %>>
-			      </div>
-			    <% end %>
+		    	<%= erb :images, :locals => {:type => :carousel}, :layout => false %>
 		    </div>
 			  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
 			    <span class="glyphicon glyphicon-chevron-left"></span>
@@ -55,15 +51,17 @@
 				type: 'GET',
 				url: window.location.pathname,
 				dataType: 'html',
-				data: {marker: $('.grid-item > img').last().attr('src').match(RegExp('thumbnail_.*$'))[0]},
+				data: {type: 'all', marker: $('.grid-item > img').last().attr('src').match(RegExp('thumbnail_.*$'))[0]},
 				success: function(data) {
 					if(!data.trim() == '') {
-						var $new_content = $( data );
-						$grid.append( $new_content );
+						$new_grid_content = $(data).filter("[class~='grid-item']");
+						$new_carousel_content = $(data).filter("[class~='item']");
+						$grid.append($new_grid_content);
+						$('.carousel-inner').append($new_carousel_content);
 						// layout Masonry after all new images load
 						$grid.imagesLoaded().done( function() {
 							$('.grid-item').css('visibility', 'visible');
-						  $grid.masonry( 'appended', $new_content );
+						  $grid.masonry('appended', $new_grid_content);
 						});
 					}
 				}
