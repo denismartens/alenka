@@ -31,7 +31,7 @@
 		});
 	});
 	var $carousel = $('#carousel');
-	$('.grid-item > img').on('click', function(e) {
+	$(document).on('click', '.grid-item > img', function(e) {
 		var $current_img_src = $(this).attr('src').replace('thumbnail_','');
 		$("img[src='"+$current_img_src+"']").eq(0).parent().addClass('active');
 		$('.modal').modal('show');
@@ -58,6 +58,7 @@
 						$new_carousel_content = $(data).filter("[class~='item']");
 						$grid.append($new_grid_content);
 						$('.carousel-inner').append($new_carousel_content);
+						$carousel.carousel();
 						// layout Masonry after all new images load
 						$grid.imagesLoaded().done( function() {
 							$('.grid-item').css('visibility', 'visible');
