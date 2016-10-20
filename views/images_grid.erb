@@ -9,10 +9,10 @@
 		    	<%= erb :images, :locals => {:type => :carousel}, :layout => false %>
 		    </div>
 			  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left"></span>
+			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 			  </a>
 			  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right"></span>
+			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			  </a>
 		  </div>
 	  </div>
@@ -33,18 +33,40 @@
 	var $carousel = $('#carousel');
 	$(document).on('click', '.grid-item > img', function(e) {
 		var $current_img_src = $(this).attr('src').replace('thumbnail_','');
-		$("img[src='"+$current_img_src+"']").eq(0).parent().addClass('active');
+		var $current_img = $("img[src='"+$current_img_src+"']")[0];
+		$($current_img).parent().addClass('active');
+		if($current_img.height > $(window).height() * 0.9) {
+			resizeImage($current_img);
+			$('.modal-dialog').css('width',$adjusted_width);
+		}
 		$('.modal').modal('show');
 	})
 	$('.modal').on('hidden.bs.modal', function (e) {
 		$carousel.carousel('pause');
   	$('.item.active').eq(0).removeClass('active');
 	})
+	$carousel.on('slide.bs.carousel', function(e) {
+		// resize carousel image if necessary
+		$img = $(e.relatedTarget).find('img')[0];
+		if($img.height > $(window).height() * 0.9) {
+			resizeImage($img);
+			$('.modal-dialog').css('width',$adjusted_width);
+		}
+	})
 	$carousel.on('slid.bs.carousel', function () {
 		if($carousel.find('.item').length - 1 == $carousel.find('.item.active').index()) {
 			// TO DO: load new images
+			console.log('reached last image');
 		}
 	})
+	$(document).bind('keyup', function(e) {
+		if(e.which == 39){
+			$carousel.carousel('next');
+		}
+		else if(e.which == 37){
+			$carousel.carousel('prev');
+		}
+	});
 	$(window).scroll(function() {
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
 			$.ajax({
@@ -69,4 +91,11 @@
 			})
 		}
 	});
+	function resizeImage($img) {
+		$ratio = $img.height / $img.width;
+		$adjusted_height = $(window).height() * 0.9;
+		$adjusted_width = $adjusted_height / $ratio;
+		$($img).css('height',$adjusted_height);
+		$($img).css('width',$adjusted_width);
+	}
 </script>
