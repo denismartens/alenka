@@ -37,6 +37,11 @@ body {
   border: none;
   margin: 0;
 }
-.modal-dialog {
+.modal-lg {
   margin: 50px auto;
+}
+.item img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
