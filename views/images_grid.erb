@@ -36,7 +36,7 @@
 		$current_img = $(".item > img[data-src='" + current_img_src + "'], .item > img[src='" + current_img_src + "']").eq(0);
 		$current_img.parent().addClass('active');
 		lazyLoadImage($current_img);
-		$('.modal-dialog').css('height',$(window).height() * 0.9);
+		$('.modal-dialog').css('height',$(window).height() * 0.95);
 		$('.modal').modal('show');
 	});
 	$('.modal').on('hidden.bs.modal', function (e) {
@@ -68,7 +68,7 @@
 	$(window).resize(function() {
 		$('.item > img[src]').each(function() {
 			resizeImage($(this));
-			$('.modal-dialog').css('height',$(window).height() * 0.9);
+			$('.modal-dialog').css('height',$(window).height() * 0.95);
 		});
 	});
 	function lazyLoadImage($img) {
@@ -78,7 +78,7 @@
     }
   	$img.parent().imagesLoaded().done( function() {
 			// resize carousel image if necessary
-			if($img[0].height > $(window).height() * 0.9) {
+			if($img[0].height > $(window).height() * 0.95) {
 				resizeImage($img);
 			}
 			$img.parent().css('visibility', 'visible');
@@ -108,7 +108,7 @@
 	}
 	function resizeImage($img) {
 		ratio = $img[0].height / $img[0].width;
-		adjusted_height = $(window).height() * 0.9;
+		adjusted_height = $(window).height() * 0.95;
 		adjusted_width = adjusted_height / ratio;
 		$img.css('height',adjusted_height);
 		$img.css('width',adjusted_width);

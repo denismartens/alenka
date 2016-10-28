@@ -38,10 +38,16 @@ body {
   margin: 0;
 }
 .modal-lg {
-  margin: 50px auto;
+  margin: 0.01rem, auto;
 }
 .item img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+.modal-backdrop {
+  opacity: 1 !important;
+}
+.modal-content {
+  background-color: black;
 }
