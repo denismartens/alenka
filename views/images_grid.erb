@@ -1,8 +1,8 @@
 <div class='grid' style="margin: 0 auto; position: relative;">
 	<%= erb :images, :locals => {:type => :grid}, :layout => false %>
 </div>
-<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div id="carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
@@ -35,9 +35,8 @@
 		current_img_src = $(this).attr('src').replace('thumbnail_','');
 		$current_img = $(".item > img[data-src='" + current_img_src + "'], .item > img[src='" + current_img_src + "']").eq(0);
 		$current_img.parent().addClass('active');
-		lazyLoadImage($current_img);
-		$('.modal-dialog').css('height',$(window).height() * 0.95);
 		$('.modal').modal('show');
+		loadImage($current_img);
 	});
 	$('.modal').on('hidden.bs.modal', function (e) {
 		$carousel.carousel('pause');
@@ -45,11 +44,14 @@
 	});
 	$carousel.on('slide.bs.carousel', function(e) {
 		$current_img = $(e.relatedTarget).find('img').eq(0);
-		lazyLoadImage($current_img);
+		loadImage($current_img);
 	})
-	$carousel.on('slid.bs.carousel', function () {
-		if($carousel.find('.item').length - 1 == $carousel.find('.item.active').index()) {
-			// TO DO: load new images
+	$carousel.on('slid.bs.carousel', function (e) {
+		$next_img = $(e.relatedTarget).next().find('img').eq(0);
+		// load next image
+		lazyLoadImage($next_img);
+		if($(e.relatedTarget).index() == 14) {
+			loadMoreImages('all');
 		}
 	});
 	$(document).bind('keyup', function(e) {
@@ -67,22 +69,25 @@
 	});
 	$(window).resize(function() {
 		$('.item > img[src]').each(function() {
+			$('.modal-dialog').eq(0).css('height',$(window).height() * 0.90);
 			resizeImage($(this));
-			$('.modal-dialog').css('height',$(window).height() * 0.95);
 		});
 	});
-	function lazyLoadImage($img) {
+	function loadImage($img) {
 		if($img.attr('data-src')) {
-    	$img.attr('src', $img.data('src'));
-    	$img.removeAttr('data-src');
-    }
+			lazyLoadImage($img);
+		}
   	$img.parent().imagesLoaded().done( function() {
 			// resize carousel image if necessary
-			if($img[0].height > $(window).height() * 0.95) {
+			if($img[0].height > $(window).height() * 0.90) {
 				resizeImage($img);
 			}
 			$img.parent().css('visibility', 'visible');
 		});
+	}
+	function lazyLoadImage($img) {
+  	$img.attr('src', $img.data('src'));
+  	$img.removeAttr('data-src');
 	}
 	function loadMoreImages($type) {
 		$.ajax({
@@ -108,7 +113,7 @@
 	}
 	function resizeImage($img) {
 		ratio = $img[0].height / $img[0].width;
-		adjusted_height = $(window).height() * 0.95;
+		adjusted_height = $(window).height() * 0.90;
 		adjusted_width = adjusted_height / ratio;
 		$img.css('height',adjusted_height);
 		$img.css('width',adjusted_width);

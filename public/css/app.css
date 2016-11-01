@@ -37,8 +37,10 @@ body {
   border: none;
   margin: 0;
 }
-.modal-lg {
-  margin: 0.01rem, auto;
+.modal-dialog {
+  width: 95%;
+  max-height: 90%;
+  margin: 0.025rem, auto;
 }
 .item img {
   display: block;
@@ -50,4 +52,7 @@ body {
 }
 .modal-content {
   background-color: black;
+}
+.carousel-control {
+  width: 5%;
 }
