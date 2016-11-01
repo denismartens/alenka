@@ -50,8 +50,8 @@
 		$next_img = $(e.relatedTarget).next().find('img').eq(0);
 		// load next image
 		lazyLoadImage($next_img);
-		if($(e.relatedTarget).index() == 14) {
-			loadMoreImages('all');
+		if(($(e.relatedTarget).index() + 1) % 15 == 0) {
+			loadMoreImages('carousel');
 		}
 	});
 	$(document).bind('keyup', function(e) {
