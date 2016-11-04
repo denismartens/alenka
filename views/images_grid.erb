@@ -4,7 +4,7 @@
 <div class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div id="carousel" class="carousel slide" data-ride="carousel">
+      <div id="carousel" class="carousel slide">
         <div class="carousel-inner" role="listbox">
 		    	<%= erb :images, :locals => {:type => :carousel}, :layout => false %>
 		    </div>
@@ -35,8 +35,15 @@
 		current_img_src = $(this).attr('src').replace('thumbnail_','');
 		$current_img = $(".item > img[data-src='" + current_img_src + "'], .item > img[src='" + current_img_src + "']").eq(0);
 		$current_img.parent().addClass('active');
+		$('.carousel-control .glyphicon').each( function() {
+			$(this).css('top',$(window).height() * 0.9 * 0.5);
+		});
 		$('.modal').modal('show');
 		loadImage($current_img);
+		$carousel.carousel({
+			interval: 8000,
+			pause: null
+		});
 	});
 	$('.modal').on('hidden.bs.modal', function (e) {
 		$carousel.carousel('pause');
@@ -51,7 +58,7 @@
 		// load next image
 		lazyLoadImage($next_img);
 		if(($(e.relatedTarget).index() + 1) % 15 == 0) {
-			loadMoreImages('carousel');
+			loadMoreImages('carousel', 5);
 		}
 	});
 	$(document).bind('keyup', function(e) {
@@ -64,10 +71,13 @@
 	});
 	$(window).scroll(function() {
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
-			loadMoreImages('all');
+			loadMoreImages('all', 15);
 		}
 	});
 	$(window).resize(function() {
+		$('.carousel-control .glyphicon').each( function() {
+			$(this).css('top',$(window).height() * 0.9 * 0.5);
+		});
 		$('.item > img[src]').each(function() {
 			$('.modal-dialog').eq(0).css('height',$(window).height() * 0.90);
 			resizeImage($(this));
@@ -89,12 +99,12 @@
   	$img.attr('src', $img.data('src'));
   	$img.removeAttr('data-src');
 	}
-	function loadMoreImages($type) {
+	function loadMoreImages($type, number) {
 		$.ajax({
 			type: 'GET',
 			url: window.location.pathname,
 			dataType: 'html',
-			data: {type: $type, marker: $('.grid-item > img').last().attr('src').match(RegExp('thumbnail_.*$'))[0]},
+			data: {type: $type, marker: $('.grid-item > img').last().attr('src').match(RegExp('thumbnail_.*$'))[0], number: number},
 			success: function(data) {
 				if(!data.trim() == '') {
 					$new_grid_content = $(data).filter("[class~='grid-item']");

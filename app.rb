@@ -21,7 +21,7 @@ end
     bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
     folder = @current_path.match(/portraits|weddings/).to_s
     if @current_path == '/portraits' || @current_path == '/weddings'
-      @images = bucket.objects(:max_keys => 15, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
+      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, :locals => {:type => params[:type].to_sym}, :layout => false) : (erb :images_grid)
     elsif @current_path == '/contact'
       @image = File.join(bucket_url, 'headshot.jpg')
