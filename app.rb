@@ -30,10 +30,6 @@ end
 	end
 end
 
-get '/testing' do
-  erb :testing
-end
-
 post '/contact' do 
   name = params[:name]
   sender_email = params[:email]

@@ -1,4 +1,4 @@
-<div class='grid' style="margin: 0 auto; position: relative;">
+<div class='grid'>
 	<%= erb :images, :locals => {:type => :grid}, :layout => false %>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog">
@@ -27,6 +27,7 @@
 		  itemSelector: '.grid-item',
 		  fitWidth: true,
 		  columnWidth: 350,
+		  gutter: 16,
 		  transitionDuration: '0.7s'
 		});
 	});

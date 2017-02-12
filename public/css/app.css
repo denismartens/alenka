@@ -1,10 +1,9 @@
-body {
-  padding-top: 130px;
-}
 .navbar {
   text-align: center;
   background: #fff;
   text-transform: uppercase;
+  margin-bottom: 0;
+  border: none;
 }
 .navbar-brand {
   float: none;
@@ -13,6 +12,7 @@ body {
   font-family: 'Times New Roman';
   font-size: 35px;
   color: #3C4242;
+  padding: 15px 5px;
 }
 .navbar-brand:hover {
   color: inherit;
@@ -29,13 +29,23 @@ body {
   font-family: 'Times New Roman';
   letter-spacing: 4px;
 }
+.grid {
+  margin: 0 auto;
+  position: relative;
+  padding-top: 116px;
+}
 .grid-item {
   display: block;
   width: 350px;
   height: auto;
-  padding: 8px;
+  padding: 0px;
   border: none;
-  margin: 0;
+  margin-bottom: 16px;
+}
+.grid-item:hover {
+  opacity: 0.9;
+  border: 1px solid #828282;
+  border-radius: 0;
 }
 .modal-dialog {
   width: 95%;
@@ -55,4 +65,7 @@ body {
 }
 .carousel-control {
   width: 5%;
+}
+.content {
+  padding-top: 116px;
 }
