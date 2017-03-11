@@ -35,6 +35,7 @@
 }
 .nav li > a.active {
   color: #F545B4;
+  background: none;
 }
 .grid {
   margin: 0 auto;
