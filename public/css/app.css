@@ -24,10 +24,17 @@
   display: inline-block;
   float: none;
 }
-.nav li>a {
-  color: #3C4242 !important;
+.nav li > a {
+  color: #3C4242;
   font-family: 'Times New Roman';
   letter-spacing: 4px;
+}
+.nav li > a:hover {
+  color: #F545B4;
+  background: none;
+}
+.nav li > a.active {
+  color: #F545B4;
 }
 .grid {
   margin: 0 auto;

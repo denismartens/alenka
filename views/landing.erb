@@ -1,0 +1,14 @@
+<div id="carousel" class="carousel slide">
+  <div class="carousel-inner" role="listbox">
+  	<%= erb :images, :locals => {:type => :carousel}, :layout => false %>
+  </div>
+  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </a>
+</div>
+<script src="/javascript/carousel.js" type='text/javascript'></script>
+<script src="/javascript/image_helpers.js" type='text/javascript'></script>
+<script src="/javascript/landing.js" type='text/javascript'></script>

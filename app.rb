@@ -10,22 +10,22 @@ AWS::S3::Base.establish_connection!(
   :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
 )
 
-get '/' do
-  redirect to('/portraits')
-end
-
-['/', '/contact', '/portraits', '/weddings'].each do |path|
+['/', '/contact', '/portraits', '/family', '/children', '/engagement'].each do |path|
 	get path do
 		@current_path = path
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
     bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
-    folder = @current_path.match(/portraits|weddings/).to_s
-    if @current_path == '/portraits' || @current_path == '/weddings'
-      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
-      request.xhr? ? (erb :images, :locals => {:type => params[:type].to_sym}, :layout => false) : (erb :images_grid)
+    if @current_path == '/'
+      folder = 'landing'
+      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
+      request.xhr? ? (erb :images, :locals => {:type => :carousel}, :layout => false) : (erb :landing)
     elsif @current_path == '/contact'
       @image = File.join(bucket_url, 'headshot.jpg')
       erb :contact
+    else
+      folder = @current_path.match(/portraits|family|children|engagement/).to_s
+      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
+      request.xhr? ? (erb :images, :locals => {:type => params[:type].to_sym}, :layout => false) : (erb :images_grid)
     end
 	end
 end

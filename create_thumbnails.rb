@@ -26,5 +26,5 @@ bucket.objects(:prefix => options[:path]).each do |img|
 	thumbnail_img = MiniMagick::Image.open(File.join(images_dir, img.key)).resize('350')
   AWS::S3::S3Object.delete(thumbnail_name, bucket.name) if AWS::S3::S3Object.exists?(thumbnail_name, bucket.name)
   AWS::S3::S3Object.store(thumbnail_name, thumbnail_img.to_blob, bucket.name)
-  logger.info "Created thumbnail for #{img.key}"
+  puts "Created thumbnail for #{img.key}"
 end
