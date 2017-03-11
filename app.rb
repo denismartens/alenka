@@ -10,7 +10,7 @@ AWS::S3::Base.establish_connection!(
   :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
 )
 
-['/', '/contact', '/portraits', '/family', '/children', '/engagement'].each do |path|
+['/', '/about', '/portraits', '/family', '/children', '/engagement'].each do |path|
 	get path do
 		@current_path = path
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
@@ -19,9 +19,9 @@ AWS::S3::Base.establish_connection!(
       folder = 'landing'
       @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, :locals => {:type => :carousel}, :layout => false) : (erb :landing)
-    elsif @current_path == '/contact'
-      @image = File.join(bucket_url, 'headshot.jpg')
-      erb :contact
+    elsif @current_path == '/about'
+      @images = bucket.objects(:prefix => 'headshot').map{|img| File.join(bucket_url, img.key)}
+      erb :about
     else
       folder = @current_path.match(/portraits|family|children|engagement/).to_s
       @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
@@ -30,7 +30,7 @@ AWS::S3::Base.establish_connection!(
 	end
 end
 
-post '/contact' do 
+post '/about' do 
   name = params[:name]
   sender_email = params[:email]
   message = params[:message]
