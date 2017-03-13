@@ -15,10 +15,25 @@ $(window).scroll(function() {
 		loadMoreImages('all', 15);
 	}
 });
-$(document).on('click', '.grid-item > img', function(e) {
+$(document).on('click', '.grid-item > img', function() {
 	current_img_src = $(this).attr('src').replace('thumbnail_','');
 	loadCarousel(current_img_src);
 });
-$('.modal').on('hidden.bs.modal', function (e) {
+var $modal = $('.modal');
+$modal.on('show.bs.modal', function() {
+	window.location.hash = 'image';
+	window.onhashchange = function() {
+		if(!location.hash){
+			$modal.modal('hide');
+		}
+	}
+});
+$(document).bind('keyup', function(e) {
+	if(e.which == 8){
+		$modal.modal('hide');
+		window.location.hash = '';
+	}
+});
+$modal.on('hidden.bs.modal', function() {
 	hideCarousel();
 });
