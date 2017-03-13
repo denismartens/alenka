@@ -30,7 +30,11 @@ AWS::S3::Base.establish_connection!(
 	end
 end
 
-post '/about' do 
+get '/contact' do
+  erb :contact
+end
+
+post '/contact' do 
   name = params[:name]
   sender_email = params[:email]
   message = params[:message]

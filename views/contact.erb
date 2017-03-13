@@ -1,0 +1,35 @@
+<div class='grid'>
+	<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-body"></div>
+	  </div>
+	</div>
+	<div class="about col-md-6 col-md-offset-1">
+		<h4> Get in touch: </h4>
+		<br />
+		<form>
+		  <div class="form-group">
+	  		<input type="text" class="form-control" name="name" placeholder="Your name">
+	  		<br />
+	  		<input type="email" class="form-control" name="email" placeholder="Your email">
+				<br />
+			  <textarea class="form-control" name="message" placeholder="Say hello!" rows="7"></textarea>
+			</div>
+		  <button type="submit" class="btn btn-default">Send</button>
+		</form>
+	</div>
+	<script>
+		$('form').on('submit', function(e) {
+			$.post({
+				url: window.location.pathname,
+				dataType: 'html',
+				data: $(this).serialize(),
+				success: function(data) {
+					$('.modal-body').html(data);
+					$('.modal').modal('show');
+				}
+			})
+			e.preventDefault();
+		})
+	</script>
+</div>
