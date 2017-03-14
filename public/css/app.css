@@ -83,8 +83,13 @@ a.navbar-brand.navbar-brand-small {
 .carousel-control {
   width: 5%;
 }
-.btn-default {
-  background-color: #F545B4;
+.btn-primary {
+  background-color: #F545B4 !important;
+  border-color: #F545B4 !important;
+  outline-color: #F545B4 !important;
+}
+.btn-primary:hover {
+  background-color: #B33283 !important;
 }
 div.about {
   font-family: 'Georgia';
