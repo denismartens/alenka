@@ -22,7 +22,7 @@ function loadMoreImages($type, number) {
 		success: function(data) {
 			if(!data.trim() == '') {
 				$new_grid_content = $(data).filter("[class~='grid-item']");
-				$new_carousel_content = $(data).filter("[class~='item']");
+				$new_carousel_content = $(data).filter("[class~='carousel-item']");
 				$grid.append($new_grid_content);
 				$('.carousel-inner').append($new_carousel_content);
 				$carousel.carousel();

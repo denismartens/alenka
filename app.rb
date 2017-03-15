@@ -16,11 +16,10 @@ AWS::S3::Base.establish_connection!(
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
     bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
     if @current_path == '/'
-      folder = 'landing'
-      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
+      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "landing/", :marker => "landing/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, :locals => {:type => :carousel}, :layout => false) : (erb :landing)
     elsif @current_path == '/about'
-      @images = bucket.objects(:prefix => 'headshot').map{|img| File.join(bucket_url, img.key)}
+      @images = bucket.objects(:prefix => "about/headshot").map{|img| File.join(bucket_url, img.key)}
       erb :about
     else
       folder = @current_path.match(/portraits|family|children|engagement/).to_s
@@ -32,6 +31,10 @@ end
 
 get '/contact' do
   erb :contact
+end
+
+get '/pricing' do
+  erb :pricing
 end
 
 post '/contact' do 

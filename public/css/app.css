@@ -104,7 +104,11 @@ a.navbar-brand.navbar-brand-small {
   background-color: #B33283 !important;
 }
 div.about {
-  font-family: 'Georgia';
+  font-family: 'Helvetica-Light';
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Helvetica';
+  text-transform: uppercase;
 }
 .headshot-img {
   width: 350px;
