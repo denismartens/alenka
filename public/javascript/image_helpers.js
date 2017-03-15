@@ -3,11 +3,8 @@ function loadImage($img) {
 		lazyLoadImage($img);
 	}
 	$img.parent().imagesLoaded().done( function() {
-		// resize carousel image if necessary
-		size_hash = determineDesiredImageSize($img);
-		if($img[0].height != size_hash['new_height'] || $img[0].width != size_hash['new_width']) {
-			resizeImage($img, size_hash);
-		}
+		// resize carousel image
+		resizeImage($img, determineLimitingDimension());
 		$img.parent().css('visibility', 'visible');
 	});
 	// window.location.hash = $img.attr('src').replace(/.*\//, '');
@@ -46,22 +43,24 @@ function determineMaxImageWidth() {
 	max_width = $(window).width();
 	return (max_width * 0.9);
 }
-function determineDesiredImageSize($img) {
+function determineLimitingDimension() {
 	size_hash = {};
 	if($(window).height() >= $(window).width()) {
-		ratio = $img[0].width / $img[0].height;
-		size_hash['new_width'] = determineMaxImageWidth();
-		size_hash['new_height'] = size_hash['new_height'] / ratio;
+		size_hash['max_width'] = determineMaxImageWidth();
 	} else {
-		ratio = $img[0].height / $img[0].width;
-		size_hash['new_height'] = determineMaxImageHeight();
-		size_hash['new_width'] = size_hash['new_height'] / ratio;
+		size_hash['max_height'] = determineMaxImageHeight();
 	}
 	return size_hash;
 }
 function resizeImage($img, size_hash) {
-	$img.css('height', size_hash['new_height']);
-	$img.css('width', size_hash['new_width']);
+	ratio = $img[0].height / $img[0].width;
+	if('max_height' in size_hash) {
+		$img.css('height', size_hash['max_height']);
+		$img.css('width', size_hash['max_height'] / ratio);
+	} else if('max_width' in size_hash) {
+		$img.css('width', size_hash['max_width']);
+		$img.css('height', size_hash['max_width'] * ratio);
+	}
 }
 function selectRandom(array) {
   return array.eq(Math.floor(Math.random() * array.length));

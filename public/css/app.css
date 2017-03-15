@@ -14,13 +14,16 @@ a.navbar-brand {
   font-size: 35px;
   color: #3C4242 !important;
   padding: 15px 5px;
+  height: auto;
 }
 a.navbar-brand.navbar-brand-small {
   font-size: 20px;
-  padding: 5px 5px;
+  padding: 5px 25px;
   text-decoration: none;
+  display: inline-block;
 }
 .navbar-toggle {
+  color: #F545B4;
   float: none;
 }
 .navbar-brand:hover {
@@ -41,7 +44,7 @@ a.navbar-brand.navbar-brand-small {
   outline: none !important;
 }
 .nav li > a:hover {
-  color: #F545B4;
+  color: #F545B4 !important;
 }
 .nav li > a.active {
   color: #F545B4;
@@ -58,6 +61,7 @@ a.navbar-brand.navbar-brand-small {
   padding: 0px;
   border: none;
   margin-bottom: 16px;
+  visibility: hidden;
 }
 .grid-item:hover {
   opacity: 0.9;
@@ -69,7 +73,10 @@ a.navbar-brand.navbar-brand-small {
   max-height: 90%;
   margin: 0.025rem, auto;
 }
-.item img {
+.carousel-item {
+  visibility: hidden;
+}
+.carousel-item img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -82,6 +89,11 @@ a.navbar-brand.navbar-brand-small {
 }
 .carousel-control {
   width: 5%;
+  visibility: hidden;
+  background-image: none !important;
+}
+.carousel-control > span.glyphicon {
+  color: #F545B4;
 }
 .btn-primary {
   background-color: #F545B4 !important;
@@ -93,4 +105,9 @@ a.navbar-brand.navbar-brand-small {
 }
 div.about {
   font-family: 'Georgia';
+}
+.headshot-img {
+  width: 350px;
+  display: block;
+  margin: auto;
 }

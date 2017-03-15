@@ -1,11 +1,11 @@
 <% @images.each do |image| %>
 	<% if type == :grid || type == :all %>
-		<div class='grid-item thumbnail' role='button' style="visibility: hidden">
+		<div class='grid-item thumbnail' role='button'>
 			<img src=<%= image %>>
 		</div>
 	<% end %>
 	<% if type == :carousel || type == :all %>
-		<div class='item' style="visibility: hidden">
+		<div class='carousel-item'>
 			<img class="img-responsive" data-src=<%= image.gsub('thumbnail_', '') %>>
 		</div>
 	<% end %>

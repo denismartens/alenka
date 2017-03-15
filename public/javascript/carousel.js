@@ -1,6 +1,6 @@
 var $carousel = $('#carousel');
 function loadCarousel(active_img_src) {
-	$current_img = $(".item > img[data-src='" + current_img_src + "'], .item > img[src='" + current_img_src + "']").eq(0);
+	$current_img = $(".carousel-item > img[data-src='" + current_img_src + "'], .carousel-item > img[src='" + current_img_src + "']").eq(0);
 	$current_img.parent().addClass('active');
 	$('.modal').modal('show');
 	loadImage($current_img);
@@ -8,14 +8,16 @@ function loadCarousel(active_img_src) {
 		interval: 8000,
 		pause: null
 	});
-	$('.carousel-control .glyphicon').each( function() {
-		$(this).css('top', determineMaxImageHeight() * 0.5 + parseInt($carousel.css('padding-top')));
-		$(this).css('visibility', 'visible');
+	$current_img.imagesLoaded().done( function() {
+		$('.carousel-control').each( function() {
+			$(this).find('glyphicon').css('top', $current_img.height() * 0.5 + parseInt($carousel.css('padding-top')));
+			$(this).css('visibility', 'visible');
+		});
 	});
 }
 function hideCarousel() {
 	$carousel.carousel('pause');
-	$('.item.active').eq(0).removeClass('active');
+	$('.carousel-item.active').eq(0).removeClass('active');
 }
 $carousel.on('slide.bs.carousel', function(e) {
 	$current_img = $(e.relatedTarget).find('img').eq(0);
@@ -37,10 +39,9 @@ $(document).bind('keyup', function(e) {
 	}
 });
 $(window).resize(function() {
-	$('.item > img[src]').each(function() {
+	$('.carousel-item > img[src]').each(function() {
 		$('.modal-dialog').eq(0).css('height',$(window).height() * 0.9);
-		size_hash = determineDesiredImageSize($(this));
-		resizeImage($(this), size_hash);
+		resizeImage($(this), determineLimitingDimension());
 	});
 	$('.carousel-control .glyphicon').each( function() {
 		$(this).css('top',$carousel.height() * 0.5 + parseInt($carousel.css('padding-top')));
