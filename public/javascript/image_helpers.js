@@ -6,8 +6,8 @@ function loadImage($img) {
 		// resize carousel image
 		resizeImage($img, determineLimitingDimension());
 		$img.parent().css('visibility', 'visible');
+		// window.location.hash = $img.attr('src').replace(/.*\//, '');
 	});
-	// window.location.hash = $img.attr('src').replace(/.*\//, '');
 }
 function lazyLoadImage($img) {
 	$img.attr('src', $img.data('src'));

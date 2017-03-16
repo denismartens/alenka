@@ -6,7 +6,7 @@ function loadCarousel(active_img_src) {
 	loadImage($current_img);
 	$carousel.carousel({
 		interval: 8000,
-		pause: null
+		pause: false
 	});
 	$current_img.imagesLoaded().done( function() {
 		$('.carousel-control').each( function() {
@@ -39,8 +39,8 @@ $(document).bind('keyup', function(e) {
 	}
 });
 $(window).resize(function() {
-	$('.carousel-item > img[src]').each(function() {
-		$('.modal-dialog').eq(0).css('height',$(window).height() * 0.9);
+	$('.carousel-item.active > img[src]').each(function() {
+		if($('.modal-dialog').length) {$('.modal-dialog').eq(0).css('height',$(window).height() * 0.9);}
 		resizeImage($(this), determineLimitingDimension());
 	});
 	$('.carousel-control .glyphicon').each( function() {
