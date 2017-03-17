@@ -2,7 +2,7 @@ var $carousel = $('#carousel');
 function loadCarousel(active_img_src) {
 	$current_img = $(".carousel-item > img[data-src='" + current_img_src + "'], .carousel-item > img[src='" + current_img_src + "']").eq(0);
 	$current_img.parent().addClass('active');
-	$('.modal').modal('show');
+	if ($('.modal').length) { $('.modal').modal('show'); }
 	loadImage($current_img);
 	$carousel.carousel({
 		interval: 8000,

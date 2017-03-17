@@ -35,5 +35,6 @@ $(document).bind('keyup', function(e) {
 	}
 });
 $modal.on('hidden.bs.modal', function() {
+	window.location.hash = '';
 	hideCarousel();
 });
