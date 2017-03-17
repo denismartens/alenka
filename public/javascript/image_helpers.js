@@ -2,9 +2,8 @@ function loadImage($img) {
 	if($img.attr('data-src')) {
 		lazyLoadImage($img);
 	}
+	setImageSize($img, determineLimitingDimension());
 	$img.parent().imagesLoaded().done( function() {
-		// resize carousel image
-		resizeImage($img, determineLimitingDimension());
 		$img.parent().css('visibility', 'visible');
 		// window.location.hash = $img.attr('src').replace(/.*\//, '');
 	});
@@ -52,7 +51,7 @@ function determineLimitingDimension() {
 	}
 	return size_hash;
 }
-function resizeImage($img, size_hash) {
+function setImageSize($img, size_hash) {
 	ratio = $img[0].height / $img[0].width;
 	if('max_height' in size_hash) {
 		$img.css('height', size_hash['max_height']);

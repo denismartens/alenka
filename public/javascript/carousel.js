@@ -41,7 +41,7 @@ $(document).bind('keyup', function(e) {
 $(window).resize(function() {
 	$('.carousel-item.active > img[src]').each(function() {
 		if($('.modal-dialog').length) {$('.modal-dialog').eq(0).css('height',$(window).height() * 0.9);}
-		resizeImage($(this), determineLimitingDimension());
+		setImageSize($(this), determineLimitingDimension());
 	});
 	$('.carousel-control .glyphicon').each( function() {
 		$(this).css('top',$carousel.height() * 0.5 + parseInt($carousel.css('padding-top')));
