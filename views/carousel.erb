@@ -1,11 +1,13 @@
-<div id="carousel" class="carousel slide">
+<div id="carousel" class="carousel slide carousel-fade">
   <div class="carousel-inner" role="listbox">
   	<%= erb :images, :locals => {:type => :carousel}, :layout => false %>
   </div>
-  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-  </a>
+  <% if controls %>
+	  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	  </a>
+  <% end %>
 </div>

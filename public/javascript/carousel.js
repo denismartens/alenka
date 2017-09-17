@@ -1,3 +1,4 @@
+jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 1500;
 var $carousel = $('#carousel');
 function loadCarousel(active_img_src) {
 	$current_img = $(".carousel-item > img[data-src='" + current_img_src + "'], .carousel-item > img[src='" + current_img_src + "']").eq(0);
