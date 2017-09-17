@@ -5,7 +5,7 @@ var $grid = $('.grid').imagesLoaded().done( function() {
 	$grid.masonry({
 	  itemSelector: '.grid-item',
 	  fitWidth: true,
-	  columnWidth: 350,
+	  columnWidth: '.grid-item',
 	  gutter: 16,
 	  transitionDuration: '0.7s'
 	});

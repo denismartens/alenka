@@ -1,0 +1,39 @@
+.grid {
+  margin: 0 auto;
+  position: relative;
+  padding-top: 150px;
+}
+.grid-item {
+  display: block;
+  width: 350px;
+  height: auto;
+  padding: 0px;
+  border: none;
+  margin-bottom: 16px;
+  visibility: hidden;
+}
+.grid-item:hover {
+  opacity: 0.9;
+  border: 1px solid #828282;
+  border-radius: 0;
+}
+@media screen and (max-width: 380px) {
+  .grid-item {
+    width: 92px;
+  }
+}
+@media screen and (max-width: 420px) and (min-width: 381px) {
+  .grid-item {
+    width: 124px;
+  }
+}
+@media screen and (max-width: 768px) and (min-width: 421px) {
+  .grid-item {
+    width: 230px;
+  }
+}
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .grid-item {
+    width: 282px;
+  }
+}

@@ -49,64 +49,6 @@ a.navbar-brand.navbar-brand-small {
 .nav li > a.active {
   color: #F545B4;
 }
-.grid {
-  margin: 0 auto;
-  position: relative;
-  padding-top: 150px;
-}
-.grid-item {
-  display: block;
-  width: 350px;
-  height: auto;
-  padding: 0px;
-  border: none;
-  margin-bottom: 16px;
-  visibility: hidden;
-}
-.grid-item:hover {
-  opacity: 0.9;
-  border: 1px solid #828282;
-  border-radius: 0;
-}
-.modal-dialog {
-  width: 95%;
-  max-height: 90%;
-  margin: 0.025rem, auto;
-}
-.carousel-item {
-  visibility: hidden;
-}
-.carousel-item img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.modal-backdrop {
-  opacity: 1 !important;
-}
-.modal-content {
-  background-color: black;
-}
-.modal-content > button.close {
-  position: absolute;
-  font-size: 50px;
-  top: -20px;
-  right: 1.3%;
-  color: #F545B4;
-  text-shadow: 0 1px 2px rgba(0,0,0,.6);
-  opacity: 0.5;
-}
-.modal-content > button.close:hover {
-  opacity: 1.0;
-}
-.carousel-control {
-  width: 5%;
-  visibility: hidden;
-  background-image: none !important;
-}
-.carousel-control > span.glyphicon {
-  color: #F545B4;
-}
 .btn-primary {
   background-color: #F545B4 !important;
   border-color: #F545B4 !important;
