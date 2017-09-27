@@ -10,19 +10,19 @@ AWS::S3::Base.establish_connection!(
   :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
 )
 
-['/', '/about', '/portraits', '/family', '/children', '/engagement'].each do |path|
+['/', '/about', '/portraits', '/family', '/children', '/engagement', '/newborn'].each do |path|
 	get path do
 		@current_path = path
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
     bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
     if @current_path == '/'
-      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "landing/", :marker => "landing/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
+      @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => 'landing/', :marker => "landing/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, :locals => {:type => :carousel}, :layout => false) : (erb :landing)
     elsif @current_path == '/about'
       @images = bucket.objects(:prefix => "about/headshot").map{|img| File.join(bucket_url, img.key)}
       erb :about
     else
-      folder = @current_path.match(/portraits|family|children|engagement/).to_s
+      folder = @current_path.match(/portraits|family|children|engagement|newborn/).to_s
       @images = bucket.objects(:max_keys => params[:number] || 25, :prefix => "#{folder}/thumbnail_", :marker => "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, :locals => {:type => params[:type].to_sym}, :layout => false) : (erb :images_grid)
     end
