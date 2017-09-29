@@ -10,7 +10,7 @@ a.navbar-brand {
   float: none;
   display: block;
   letter-spacing: 4px;
-  font-family: 'Times New Roman';
+  font-family: Trebuchet, sans-serif;
   font-size: 35px;
   color: #3C4242 !important;
   padding: 15px 5px;
@@ -38,7 +38,8 @@ a.navbar-brand.navbar-brand-small {
 }
 .nav li > a {
   color: #3C4242;
-  font-family: 'Times New Roman';
+  font-family: Trebuchet, sans-serif;
+  font-size: 12px;
   letter-spacing: 4px;
   background: none !important;
   outline: none !important;
