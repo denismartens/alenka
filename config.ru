@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
-require './app'
+require_relative 'app.rb'
 
 $stdout.sync = true
 
