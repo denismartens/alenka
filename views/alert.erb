@@ -5,7 +5,7 @@ elsif notice == 'failure'
 	alert_type = 'danger'
 	alert_text = 'Sorry, your message could not be sent.'
 end %>
-<div class="alert alert-<%=alert_type%> text-center" role="alert">
+<div class="alert alert-<%=alert_type%> text-center" role='alert'>
 	<%= alert_text %>
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div>

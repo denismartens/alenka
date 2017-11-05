@@ -21,7 +21,7 @@ AWS::S3::Base.establish_connection!(
       @images = bucket.objects(max_keys: params[:number] || 25, prefix: 'landing/', marker: "landing/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, locals: {type: :carousel}, layout: false) : (erb :landing)
     elsif @current_path == '/about'
-      @images = bucket.objects(prefix: "about/headshot").map{|img| File.join(bucket_url, img.key)}
+      @images = bucket.objects(prefix: 'about/headshot').map{|img| File.join(bucket_url, img.key)}
       erb :about
     else
       folder = @current_path.match(/children|engagement|family|maternity|newborn|wedding/).to_s
