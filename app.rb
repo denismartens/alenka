@@ -3,6 +3,8 @@ require 'pony'
 require 'dotenv'
 require 'aws/s3'
 
+configure { set :server, :puma }
+
 Dotenv.load
 
 AWS::S3::Base.establish_connection!(
