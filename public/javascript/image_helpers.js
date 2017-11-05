@@ -61,6 +61,3 @@ function setImageSize($img, size_hash) {
 		$img.css('height', size_hash['max_width'] * ratio);
 	}
 }
-function selectRandom(array) {
-  return array.eq(Math.floor(Math.random() * array.length));
-}
