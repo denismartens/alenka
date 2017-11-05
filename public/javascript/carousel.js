@@ -28,7 +28,7 @@ $carousel.on('slid.bs.carousel', function (e) {
 	$next_img = $(e.relatedTarget).next().find('img').eq(0);
 	// load next image
 	lazyLoadImage($next_img);
-	if(($(e.relatedTarget).index() + 1) % 15 == 0) {
+	if(($(e.relatedTarget).index() + 1) % 25 == 0) {
 		loadMoreImages('carousel', 5);
 	}
 });

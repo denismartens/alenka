@@ -12,7 +12,7 @@ var $grid = $('.grid').imagesLoaded().done( function() {
 });
 $(window).scroll(function() {
 	if($(window).scrollTop() + $(window).height() == $(document).height()) {
-		loadMoreImages('all', 15);
+		loadMoreImages('all', 25);
 	}
 });
 $(document).on('click', '.grid-item > img', function() {
