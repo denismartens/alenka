@@ -12,3 +12,5 @@ gem 'aws-s3'
 gem 'mini_magick'
 
 gem 'puma'
+
+gem 'sprockets'

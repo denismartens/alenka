@@ -1,35 +1,44 @@
-function loadImage($img) {
-	if($img.attr('data-src')) {
-		lazyLoadImage($img);
-	}
+function loadImage($img, do_after) {
 	setImageSize($img, determineLimitingDimension());
-	$img.parent().imagesLoaded().done( function() {
-		$img.parent().css('visibility', 'visible');
-		// window.location.hash = $img.attr('src').replace(/.*\//, '');
-	});
-}
-function lazyLoadImage($img) {
 	$img.attr('src', $img.data('src'));
 	$img.removeAttr('data-src');
+	if(typeof do_after !== 'undefined') {
+		$img.imagesLoaded().done( function() {
+			do_after();
+			// window.location.hash = $img.attr('src').replace(/.*\//, '');
+		});
+	}
 }
-function loadMoreImages($type, number) {
+function loadMoreGridImages() {
 	$.ajax({
 		type: 'GET',
 		url: window.location.pathname,
 		dataType: 'html',
-		data: {type: $type, marker: $('.grid-item > img').last().attr('src').match(RegExp('thumbnail_.*$'))[0], number: number},
+		data: {marker: $('.grid-item > img').last().attr('src').match(RegExp('[^/]+$'))[0]},
 		success: function(data) {
 			if(!data.trim() == '') {
 				$new_grid_content = $(data).filter("[class~='grid-item']");
-				$new_carousel_content = $(data).filter("[class~='carousel-item']");
-				$grid.append($new_grid_content);
-				$('.carousel-inner').append($new_carousel_content);
-				$carousel.carousel();
-				// layout Masonry after all new images load
-				$grid.imagesLoaded().done( function() {
-					$('.grid-item').css('visibility', 'visible');
-				  $grid.masonry('appended', $new_grid_content);
+				$('.grid').append($new_grid_content);
+				$new_grid_content.imagesLoaded().done( function() {
+					$new_grid_content.css('visibility', 'visible');
+				  $('.grid').masonry('appended', $new_grid_content);
 				});
+			}
+		}
+	})
+}
+function loadMoreCarouselImages() {
+	$marker = $('.carousel-item > img').last()
+	$.ajax({
+		type: 'GET',
+		url: window.location.pathname,
+		dataType: 'html',
+		data: {marker: ($marker.attr('data-src') || $marker.attr('src')).match(RegExp('[^/]+$'))[0]},
+		success: function(data) {
+			if(!data.trim() == '') {
+				$new_carousel_content = $(data).filter("[class~='carousel-item']");
+				$('.carousel-inner').append($new_carousel_content);
+				$('#carousel').carousel();
 			}
 		}
 	})

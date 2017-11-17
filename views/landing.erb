@@ -1,12 +1,10 @@
 <div class='grid'>
 	<%= erb :carousel, layout: false, locals: {controls: false}%>
 </div>
-<script src='/javascript/carousel.js' type='text/javascript'></script>
-<script src='/javascript/image_helpers.js' type='text/javascript'></script>
 <script type='text/javascript'>
 	$(document).ready(function() {
-		all_imgs = $('.carousel-item > img');
-		current_img_src = all_imgs.eq(Math.floor(Math.random() * all_imgs.length)).attr('data-src');
-		loadCarousel(current_img_src);
+		$all_imgs = $('.carousel-item > img');
+		$current_img = $all_imgs.eq(Math.floor(Math.random() * $all_imgs.length));
+		loadImage($current_img, initCarousel($current_img));
 	});
 </script>

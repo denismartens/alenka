@@ -58,26 +58,3 @@ a.navbar-brand.navbar-brand-small {
 .btn-primary:hover {
   background-color: #B33283 !important;
 }
-.about {
-  font-family: 'Helvetica-Light';
-}
-.pricing {
-  font-family: 'Helvetica-Light';
-}
-.pricing h3 {
-  font-family: 'Helvetica';
-  text-transform: uppercase;
-  text-align: center;
-}
-.pricing h4 {
-  font-family: 'Helvetica';
-  text-transform: uppercase;
-}
-.about h4 {
-  font-family: 'Helvetica';
-}
-.headshot-img {
-  width: 350px;
-  display: block;
-  margin: auto;
-}
