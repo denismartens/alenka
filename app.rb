@@ -40,10 +40,8 @@ get '/pricing' do
   erb :pricing
 end
 
-get '/create-thumbnails' do
-  %w[children engagement family maternity newborn wedding].each do |path|
-    system("ruby create_thumbnails.rb -d #{path}")
-  end
+get '/create-thumbnails/:path' do
+  system("ruby create_thumbnails.rb -d #{params['path']}")
 end
 
 post '/contact' do 
