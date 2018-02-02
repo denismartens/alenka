@@ -2,6 +2,7 @@ require 'sinatra'
 require 'pony'
 require 'dotenv'
 require 'aws/s3'
+require 'mini_magick'
 
 configure { set :server, :puma }
 
@@ -37,6 +38,12 @@ end
 
 get '/pricing' do
   erb :pricing
+end
+
+get '/create-thumbnails' do
+  %w[children engagement family maternity newborn wedding].each do |path|
+    system("ruby create_thumbnails.rb -d #{path}")
+  end
 end
 
 post '/contact' do 
