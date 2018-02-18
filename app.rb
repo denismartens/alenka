@@ -13,7 +13,7 @@ AWS::S3::Base.establish_connection!(
   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
 )
 
-%w[/ /about /children /engagement /family /maternity /newborn /wedding].each do |path|
+%w[/ /portraits /wedding].each do |path|
 	get path do
 		@current_path = path
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
@@ -21,11 +21,11 @@ AWS::S3::Base.establish_connection!(
     if @current_path == '/'
       @images = bucket.objects(max_keys: 10, prefix: 'landing/', marker: "landing/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, locals: {type: :carousel}, layout: false) : (erb :landing)
-    elsif @current_path == '/about'
-      @images = bucket.objects(prefix: 'about/headshot').map{|img| File.join(bucket_url, img.key)}
-      erb :about
+    # elsif @current_path == '/about'
+    #   @images = bucket.objects(prefix: 'about/headshot').map{|img| File.join(bucket_url, img.key)}
+    #   erb :about
     else
-      folder = @current_path.match(/children|engagement|family|maternity|newborn|wedding/).to_s
+      folder = @current_path.match(/portraits|wedding/).to_s
       @images = bucket.objects(max_keys: 25, prefix: params[:marker] ? "#{folder}/" : "#{folder}/thumbnail_", marker: "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
       request.xhr? ? (erb :images, locals: {type: params[:marker].start_with?('thumbnail_') ? :grid : :carousel}, layout: false) : (erb :images_grid)
     end
@@ -41,7 +41,7 @@ get '/pricing' do
 end
 
 get '/create-thumbnails/:path' do
-  system("ruby create_thumbnails.rb -d #{params['path']}")
+  system("ruby create_thumbnails.rb -d #{params['path']} -r")
 end
 
 post '/contact' do 
