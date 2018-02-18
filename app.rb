@@ -41,7 +41,15 @@ get '/pricing' do
 end
 
 get '/create-thumbnails/:path' do
-  system("ruby create_thumbnails.rb -d #{params['path']} -r")
+  protected!
+  status 202
+  # request.env['HTTP_AUTHORIZATION'] = ""
+  # @auth = nil
+  if system("ruby create_thumbnails.rb -d #{params['path']} -r")
+    erb :alert, locals: {notice: 'success', text: 'Thumbnails successfully created'}, layout: false
+  else
+    halt erb :alert, locals: {notice: 'failure', text: 'Something went wrong'}, layout: false
+  end
 end
 
 post '/contact' do 
@@ -66,9 +74,20 @@ post '/contact' do
 	    }
     )
     logger.info('success')
-    erb :alert, locals: {notice: 'success'}, layout: false
+    erb :alert, locals: {notice: 'success', text: 'Thank you, your message has been sent!'}, layout: false
   rescue
     logger.info('failure')
-    erb :alert, locals: {notice: 'failure'}, layout: false
+    erb :alert, locals: {notice: 'failure', text: 'Sorry, your message could not be sent.'}, layout: false
   end
+end
+
+def protected!
+  return if authorized?
+  headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+  halt 401, "Not authorized\n"
+end
+
+def authorized?
+  @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+  @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == [ENV['ADMIN_USER'], ENV['ADMIN_PASSWORD']]
 end
