@@ -40,18 +40,6 @@ get '/pricing' do
   erb :pricing
 end
 
-# get '/create-thumbnails/:path' do
-#   protected!
-#   status 202
-#   # request.env['HTTP_AUTHORIZATION'] = ""
-#   # @auth = nil
-#   if system("ruby create_thumbnails.rb -d #{params['path']} -r")
-#     erb :alert, locals: {notice: 'success', text: 'Thumbnails successfully created'}, layout: false
-#   else
-#     halt erb :alert, locals: {notice: 'failure', text: 'Something went wrong'}, layout: false
-#   end
-# end
-
 post '/contact' do 
   name = params[:name]
   sender_email = params[:email]
@@ -80,14 +68,3 @@ post '/contact' do
     erb :alert, locals: {notice: 'failure', text: 'Sorry, your message could not be sent.'}, layout: false
   end
 end
-
-# def protected!
-#   return if authorized?
-#   headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-#   halt 401, "Not authorized\n"
-# end
-
-# def authorized?
-#   @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-#   @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == [ENV['ADMIN_USER'], ENV['ADMIN_PASSWORD']]
-# end

@@ -17,9 +17,4 @@ $(document).ready(function() {
 			loadMoreGridImages();
 		}
 	});
-	// $(document).on('click', '.grid-item > img', function() {
-	// 	current_img_src = $(this).attr('src').replace('thumbnail_','');
-	// 	$current_img = $(".carousel-item > img[data-src='" + current_img_src + "'], .carousel-item > img[src='" + current_img_src + "']").eq(0);
-	// 	loadImage($current_img, initCarousel($current_img));
-	// });
 });

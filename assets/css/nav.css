@@ -43,6 +43,8 @@ a.navbar-brand.navbar-brand-small {
   letter-spacing: 4px;
   background: none !important;
   outline: none !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .nav li > a:hover {
   color: #F545B4 !important;

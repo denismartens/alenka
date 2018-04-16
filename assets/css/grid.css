@@ -1,7 +1,7 @@
 .grid {
   margin: 0 auto;
   position: relative;
-  padding-top: 150px;
+  padding-top: 125px;
   width: 80vw;
   overflow: hidden;
 }
@@ -16,28 +16,3 @@
 .grid-item img {
   max-width: 100%;
 }
-/*.grid-item:hover {
-  opacity: 0.9;
-  border: 1px solid #828282;
-  border-radius: 0;
-}*/
-/*@media screen and (max-width: 380px) {
-  .grid-item {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 420px) and (min-width: 381px) {
-  .grid-item {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 768px) and (min-width: 421px) {
-  .grid-item {
-    width: 50%;
-  }
-}
-@media screen and (max-width: 1024px) and (min-width: 769px) {
-  .grid-item {
-    width: 50%;
-  }
-}*/
