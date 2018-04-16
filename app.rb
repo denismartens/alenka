@@ -26,8 +26,8 @@ AWS::S3::Base.establish_connection!(
     #   erb :about
     else
       folder = @current_path.match(/portraits|wedding/).to_s
-      @images = bucket.objects(max_keys: 25, prefix: params[:marker] ? "#{folder}/" : "#{folder}/thumbnail_", marker: "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
-      request.xhr? ? (erb :images, locals: {type: params[:marker].start_with?('thumbnail_') ? :grid : :carousel}, layout: false) : (erb :images_grid)
+      @images = bucket.objects(max_keys: 10, prefix: "#{folder}/", marker: "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
+      request.xhr? ? (erb :images, locals: {type: :grid}, layout: false) : (erb :images_grid)
     end
 	end
 end
@@ -40,17 +40,17 @@ get '/pricing' do
   erb :pricing
 end
 
-get '/create-thumbnails/:path' do
-  protected!
-  status 202
-  # request.env['HTTP_AUTHORIZATION'] = ""
-  # @auth = nil
-  if system("ruby create_thumbnails.rb -d #{params['path']} -r")
-    erb :alert, locals: {notice: 'success', text: 'Thumbnails successfully created'}, layout: false
-  else
-    halt erb :alert, locals: {notice: 'failure', text: 'Something went wrong'}, layout: false
-  end
-end
+# get '/create-thumbnails/:path' do
+#   protected!
+#   status 202
+#   # request.env['HTTP_AUTHORIZATION'] = ""
+#   # @auth = nil
+#   if system("ruby create_thumbnails.rb -d #{params['path']} -r")
+#     erb :alert, locals: {notice: 'success', text: 'Thumbnails successfully created'}, layout: false
+#   else
+#     halt erb :alert, locals: {notice: 'failure', text: 'Something went wrong'}, layout: false
+#   end
+# end
 
 post '/contact' do 
   name = params[:name]
@@ -81,13 +81,13 @@ post '/contact' do
   end
 end
 
-def protected!
-  return if authorized?
-  headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-  halt 401, "Not authorized\n"
-end
+# def protected!
+#   return if authorized?
+#   headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+#   halt 401, "Not authorized\n"
+# end
 
-def authorized?
-  @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-  @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == [ENV['ADMIN_USER'], ENV['ADMIN_PASSWORD']]
-end
+# def authorized?
+#   @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+#   @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == [ENV['ADMIN_USER'], ENV['ADMIN_PASSWORD']]
+# end

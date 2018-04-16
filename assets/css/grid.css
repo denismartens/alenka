@@ -2,38 +2,42 @@
   margin: 0 auto;
   position: relative;
   padding-top: 150px;
+  width: 80vw;
+  overflow: hidden;
 }
 .grid-item {
   display: block;
-  width: 350px;
-  height: auto;
+  width: 100%;
   padding: 0px;
   border: none;
   margin-bottom: 16px;
   visibility: hidden;
 }
-.grid-item:hover {
+.grid-item img {
+  max-width: 100%;
+}
+/*.grid-item:hover {
   opacity: 0.9;
   border: 1px solid #828282;
   border-radius: 0;
-}
-@media screen and (max-width: 380px) {
+}*/
+/*@media screen and (max-width: 380px) {
   .grid-item {
-    width: 92px;
+    width: 100%;
   }
 }
 @media screen and (max-width: 420px) and (min-width: 381px) {
   .grid-item {
-    width: 124px;
+    width: 100%;
   }
 }
 @media screen and (max-width: 768px) and (min-width: 421px) {
   .grid-item {
-    width: 230px;
+    width: 50%;
   }
 }
 @media screen and (max-width: 1024px) and (min-width: 769px) {
   .grid-item {
-    width: 282px;
+    width: 50%;
   }
-}
+}*/
