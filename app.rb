@@ -19,15 +19,33 @@ AWS::S3::Base.establish_connection!(
     bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
     bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
     if @current_path == '/'
-      @images = bucket.objects(max_keys: 6, prefix: 'landing/', marker: "landing/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
-      request.xhr? ? (erb :images, locals: {type: :carousel}, layout: false) : (erb :landing)
+      @images = bucket.objects(
+        max_keys: 6,
+        prefix: 'landing/',
+        marker: "landing/#{params[:marker]}")
+      .map{|img|
+        File.join(bucket_url, img.key)}
+    if request.xhr?
+      erb :images, locals: {type: :carousel}, layout: false
+    else
+      erb :landing
+    end
     # elsif @current_path == '/about'
     #   @images = bucket.objects(prefix: 'about/headshot').map{|img| File.join(bucket_url, img.key)}
     #   erb :about
     else
       folder = @current_path.match(/portraits|wedding/).to_s
-      @images = bucket.objects(max_keys: 6, prefix: "#{folder}/", marker: "#{folder}/#{params[:marker]}").map{|img| File.join(bucket_url, img.key)}
-      request.xhr? ? (erb :images, locals: {type: :grid}, layout: false) : (erb :images_grid)
+      @images = bucket.objects(
+        max_keys: 6,
+        prefix: "#{folder}/",
+        marker: "#{folder}/#{params[:marker]}")
+      .map{|img|
+        File.join(bucket_url, img.key)}
+      if request.xhr?
+        erb :images, locals: {type: :grid}, layout: false
+      else
+        erb :images_grid
+      end
     end
 	end
 end

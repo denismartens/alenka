@@ -1,8 +1,6 @@
-.about {
+.about, .pricing, .contact {
   font-family: 'Helvetica-Light';
-}
-.pricing {
-  font-family: 'Helvetica-Light';
+  padding-top: 25px;
 }
 .pricing h3 {
   font-family: 'Helvetica';
