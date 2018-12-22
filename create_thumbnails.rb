@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #!/usr/bin/env ruby
 require_relative 'app.rb'
 require 'mini_magick'
@@ -5,7 +6,7 @@ require 'optparse'
 
 options = {replace: false}
 OptionParser.new do |opts|
-  opts.banner = "Usage: create_thumbnails.rb [options]"
+  opts.banner = 'Usage: create_thumbnails.rb [options]'
 	opts.on('-r', '--replace', 'Replace existing thumbnail images') do
 		options[:replace] = true
 	end
@@ -13,7 +14,7 @@ OptionParser.new do |opts|
     options[:path] = path
   end
 end.parse!
-raise "Directory not provided, please provide a directory" if options[:path].nil?
+raise 'Directory not provided, please provide a directory' if options[:path].nil?
 bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
 images_dir = "http://s3.amazonaws.com/#{bucket.name}"
 bucket.objects(prefix: options[:path]).each do |img|
