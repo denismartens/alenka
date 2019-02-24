@@ -1,18 +1,17 @@
 .about, .pricing, .contact {
   font-family: 'Helvetica-Light';
-  padding-top: 25px;
-}
-.pricing h3 {
-  font-family: 'Helvetica';
-  text-transform: uppercase;
-  text-align: center;
+  font-size: 16px;
+  padding-top: 20px;
 }
 .pricing h4 {
-  font-family: 'Helvetica';
-  text-transform: uppercase;
+  font-family: 'Arial';
+  font-size: 16px;
+  font-weight: bold;
 }
 .about h4 {
-  font-family: 'Helvetica';
+  font-family: 'Arial';
+  font-size: 16px;
+  font-weight: bold;
 }
 .headshot-img {
   width: 350px;
