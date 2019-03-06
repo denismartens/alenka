@@ -15,28 +15,36 @@ AWS::S3::Base.establish_connection!(
   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
 )
 
-%w[/ /portraits /wedding].each do |path|
+bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
+bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
+
+%w[/ /portraits /travel /about /contact /pricing].each do |path|
 	get path do
 		@current_path = path
-    bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
-    bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
-    if @current_path == '/'
+    case path
+    when '/'
       @images = bucket.objects(
         max_keys: 6,
         prefix: 'landing/',
         marker: "landing/#{params[:marker]}")
       .map{|img|
         File.join(bucket_url, img.key)}
-    if request.xhr?
-      erb :images, locals: {type: :carousel}, layout: false
-    else
-      erb :landing
-    end
-    # elsif @current_path == '/about'
-    #   @images = bucket.objects(prefix: 'about/headshot').map{|img| File.join(bucket_url, img.key)}
-    #   erb :about
-    else
-      folder = @current_path.match(/portraits|wedding/).to_s
+      if request.xhr?
+        erb :images, locals: {type: :landing}, layout: false
+      else
+        erb :landing
+      end
+    when '/about'
+      @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/about.jpg', bucket.name).key)
+      erb :about
+    when '/contact'
+      @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/about.jpg', bucket.name).key)
+      erb :contact
+    when '/pricing'
+      @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/pricing.jpg', bucket.name).key)
+      erb :pricing
+    when '/portraits', '/travel'
+      folder = @current_path.match(/portraits|travel/).to_s
       @images = bucket.objects(
         max_keys: 6,
         prefix: "#{folder}/",
@@ -44,20 +52,12 @@ AWS::S3::Base.establish_connection!(
       .map{|img|
         File.join(bucket_url, img.key)}
       if request.xhr?
-        erb :images, locals: {type: :grid}, layout: false
+        erb :images, locals: {type: :carousel}, layout: false
       else
-        erb :images_grid
+        erb :images, locals: {type: :carousel}
       end
     end
 	end
-end
-
-get '/contact' do
-  erb :contact
-end
-
-get '/pricing' do
-  erb :pricing
 end
 
 post '/contact' do 

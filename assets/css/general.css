@@ -1,0 +1,55 @@
+.about, .pricing, .contact {
+  font-family: 'Helvetica-Light';
+  font-size: 16px;
+  padding: 50px 50px;
+  background-color: #ffffff;
+  text-align: center;
+}
+.pricing > ul {
+  text-align: justify;
+}
+.pricing h4, .about h4 {
+  font-family: 'Arial';
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0;
+}
+.about > p {
+  margin-top: 2rem;
+}
+.btn-primary {
+  background-color: #34b9d7 !important;
+  border-color: #34b9d7 !important;
+  outline-color: #34b9d7 !important;
+  border-radius: 25px;
+  font-family: 'Lato', 'sans-serif';
+  padding: 0.3rem 0.9rem;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.btn-primary:hover {
+  background-color: #2da4bf !important;
+}
+img.img-fluid {
+  object-fit: cover !important;
+  object-position: center top !important;
+}
+.banner {
+  height: 233px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  display: table;
+  position: relative;
+}
+body {
+  background-color: #f0f0f0;
+  height: 100vh;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}

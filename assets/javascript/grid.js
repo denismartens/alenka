@@ -1,20 +1,20 @@
 // layout Masonry after all images load
-$(document).ready(function() {
-	$('.grid').imagesLoaded().done( function() {
+document.addEventListener('DOMContentLoaded', () => {
+	document.querySelector('.grid').imagesLoaded().done( function() {
 		// init Masonry
-		$('.grid').masonry({
-		  itemSelector: '.grid-item',
-		  percentPosition: true,
-		  columnWidth: '.grid-item',
-		  gutter: 16,
-		  transitionDuration: '0.7s',
-		  horizontalOrder: true
+		document.querySelector('.grid').masonry({
+			itemSelector: '.grid-item',
+			percentPosition: true,
+			columnWidth: '.grid-item',
+			gutter: 16,
+			transitionDuration: '0.7s',
+			horizontalOrder: true
 		});
-		$('.grid-item').css('visibility', 'visible');
+		document.querySelector('.grid-item').setAttribute("style", "visibility:visible;");
 	});
-	$(window).scroll(function() {
-		if($(window).scrollTop() + $(window).height() == $(document).height()) {
+	window.onscroll = function(e) {
+		if(e.target.scrollY + e.target.innerHeight == document.body.clientHeight) {
 			loadMoreGridImages();
 		}
-	});
+	};
 });

@@ -1,5 +1,5 @@
 function loadImage($img, do_after) {
-	setImageSize($img, determineLimitingDimension());
+	// setImageSize($img, determineLimitingDimension());
 	$img.attr('src', $img.data('src'));
 	$img.removeAttr('data-src');
 	if(typeof do_after !== 'undefined') {

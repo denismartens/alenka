@@ -3,6 +3,9 @@
   margin-left: auto;
   margin-right: auto;
 }
+.carousel-control-prev, .carousel-control-next {
+  width: 5%;
+}
 .carousel-fade .carousel-inner .carousel-item {
   visibility: hidden;
   opacity: 0;

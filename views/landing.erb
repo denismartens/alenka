@@ -1,6 +1,4 @@
-<div class='grid'>
-	<%= erb :carousel, layout: false, locals: {controls: false}%>
-</div>
+<%= erb :carousel, layout: false, locals: {controls: true}%>
 <script type='text/javascript'>
 	$(document).ready(function() {
 		$all_imgs = $('.carousel-item > img');

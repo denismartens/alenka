@@ -3,11 +3,13 @@
   	<%= erb :images, locals: {type: :carousel}, layout: false %>
   </div>
   <% if controls %>
-	  <div class='left carousel-control' href='#carousel' data-slide='prev'>
-	    <span class='glyphicon glyphicon-chevron-left' role='button' aria-hidden='true'></span>
-	  </div>
-	  <div class='right carousel-control' href='#carousel' data-slide='next'>
-	    <span class='glyphicon glyphicon-chevron-right' role='button' aria-hidden='true'></span>
-	  </div>
+	  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
   <% end %>
 </div>

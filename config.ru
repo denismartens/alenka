@@ -8,7 +8,7 @@ $stdout.sync = true
 
 map '/assets' do
   environment = Sprockets::Environment.new
-  environment.append_path 'assets/fonts'
+  environment.append_path 'assets/icons'
   environment.append_path 'assets/css'
   environment.append_path 'assets/javascript'
   run environment
