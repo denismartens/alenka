@@ -3,4 +3,3 @@
 //= require ./imagesloaded.min.js
 //= require ./image_helpers.js
 //= require ./carousel.js
-//= require ./grid.js

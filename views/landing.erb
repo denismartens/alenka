@@ -1,8 +1,8 @@
 <%= erb :carousel, layout: false, locals: {controls: true}%>
 <script type='text/javascript'>
 	$(document).ready(function() {
-		$all_imgs = $('.carousel-item > img');
-		$current_img = $all_imgs.eq(Math.floor(Math.random() * $all_imgs.length));
-		loadImage($current_img, initCarousel($current_img));
+		$all_items = $('.carousel-item');
+		$current_item = $all_items.eq(Math.floor(Math.random() * $all_items.length));
+		loadImage($current_item, initCarousel($current_item));
 	});
 </script>

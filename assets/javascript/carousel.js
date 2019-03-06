@@ -1,14 +1,14 @@
 jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 1500;
-function initCarousel($current_img) {
-	$current_img.parent().addClass('active');
+function initCarousel($current_item) {
+	$current_item.addClass('active');
 	if ($('.modal').length) { $('.modal').modal('show'); }
 	$('#carousel').carousel({
 		interval: 8000,
 		pause: false
 	});
-	$current_img.parent().css('visibility', 'visible');
+	$current_item.css('visibility', 'visible');
 	$('.carousel-control').each( function() {
-		$(this).find('glyphicon').css('top', $current_img.height() * 0.5 + parseInt($('#carousel').css('padding-top')));
+		$(this).find('glyphicon').css('top', $current_item.height() * 0.5 + parseInt($('#carousel').css('padding-top')));
 		$(this).css('visibility', 'visible');
 	});
 }
@@ -18,11 +18,11 @@ function hideCarousel() {
 }
 $(document).ready(function() {
 	$('#carousel').on('slide.bs.carousel', function(e) {
-		$current_img = $(e.relatedTarget).find('img').eq(0);
-		loadImage($current_img, function() { $current_img.parent().css('visibility', 'visible'); });
+		$current_item = $(e.relatedTarget).eq(0);
+		loadImage($current_item, function() { $current_item.css('visibility', 'visible'); });
 	});
 	$('#carousel').on('slid.bs.carousel', function (e) {
-		loadImage($(e.relatedTarget).next().find('img').eq(0));
+		loadImage($(e.relatedTarget).next().eq(0));
 		if($(e.relatedTarget).next().index() == ($('.carousel-item').length - 1)) {
 			loadMoreCarouselImages();
 		}

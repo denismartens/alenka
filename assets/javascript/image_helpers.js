@@ -1,11 +1,11 @@
-function loadImage($img, do_after) {
-	// setImageSize($img, determineLimitingDimension());
-	$img.attr('src', $img.data('src'));
-	$img.removeAttr('data-src');
+function loadImage($current_item, do_after) {
+	// setImageSize($current_item, determineLimitingDimension());
+	$current_item.css('background-image', 'url(' + $current_item.data('src') + ')');
+	$current_item.removeAttr('data-src');
 	if(typeof do_after !== 'undefined') {
-		$img.imagesLoaded().done( function() {
+		$current_item.imagesLoaded().done( function() {
 			do_after();
-			// window.location.hash = $img.attr('src').replace(/.*\//, '');
+			// window.location.hash = $current_item.css('background-image').replace(/.*\//, '');
 		});
 	}
 }
@@ -28,12 +28,12 @@ function loadMoreGridImages() {
 	})
 }
 function loadMoreCarouselImages() {
-	$marker = $('.carousel-item > img').last()
+	$marker = $('.carousel-item').last()
 	$.ajax({
 		type: 'GET',
 		url: window.location.pathname,
 		dataType: 'html',
-		data: {marker: ($marker.attr('data-src') || $marker.attr('src')).match(RegExp('[^/]+$'))[0]},
+		data: {marker: ($marker.attr('data-src') || $marker.css('background-image')).match(RegExp('[^/]+$'))[0]},
 		success: function(data) {
 			if(!data.trim() == '') {
 				$new_carousel_content = $(data).filter("[class~='carousel-item']");
