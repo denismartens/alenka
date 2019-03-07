@@ -33,7 +33,7 @@ function loadMoreCarouselImages() {
 		type: 'GET',
 		url: window.location.pathname,
 		dataType: 'html',
-		data: {marker: ($marker.attr('data-src') || $marker.css('background-image')).match(RegExp('[^/]+$'))[0]},
+		data: {marker: ($marker.attr('data-src') || $marker.css('background-image').match(RegExp('(?<image_name>[^/]+)"\\)$')).groups.image_name)},
 		success: function(data) {
 			if(!data.trim() == '') {
 				$new_carousel_content = $(data).filter("[class~='carousel-item']");
