@@ -1,17 +1,42 @@
 .grid {
   margin: 0 auto;
-  position: relative;
-  width: 100vw;
-  overflow: hidden;
+  background-color: #ffffff;
+  padding-top: 100px;
 }
 .grid-item {
   display: block;
-  width: 100%;
+  height: auto;
   padding: 0px;
   border: none;
-  margin-bottom: 16px;
   visibility: hidden;
 }
 .grid-item img {
   max-width: 100%;
+}
+.grid-item:hover {
+  opacity: 0.8;
+}
+@media screen and (max-width: 767px) {
+  .grid-item {
+    width: 90%;
+    margin-bottom: 2%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px){
+  .grid-item {
+    width: 45%;
+    margin-bottom: 4%;
+  }
+  .gutter {
+    width: 4%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .grid-item {
+    width: 30%;
+    margin-bottom: 2%;
+  }
+  .gutter {
+    width: 2%;
+  }
 }

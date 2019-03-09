@@ -1,20 +1,23 @@
 // layout Masonry after all images load
-document.addEventListener('DOMContentLoaded', () => {
-	document.querySelector('.grid').imagesLoaded().done( function() {
+$(document).ready(function() {
+	$('.grid').imagesLoaded().done( function() {
 		// init Masonry
-		document.querySelector('.grid').masonry({
+		$('.grid').masonry({
 			itemSelector: '.grid-item',
-			percentPosition: true,
 			columnWidth: '.grid-item',
-			gutter: 16,
+			gutter: '.gutter',
 			transitionDuration: '0.7s',
-			horizontalOrder: true
+			percentPosition: true,
+			horizontalOrder: true,
+			containerStyle: null
 		});
-		document.querySelector('.grid-item').setAttribute("style", "visibility:visible;");
+		$('.grid-item').css('visibility', 'visible');
 	});
-	window.onscroll = function(e) {
-		if(e.target.scrollY + e.target.innerHeight == document.body.clientHeight) {
-			loadMoreGridImages();
+	$(window).scroll(function() {
+		if($(window).scrollTop() + $(window).height() == $(document).height()) {
+			$('.grid').imagesLoaded().done( function() {
+				loadMoreGridImages();
+			})
 		}
-	};
+	});
 });

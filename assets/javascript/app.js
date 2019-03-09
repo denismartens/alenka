@@ -3,3 +3,5 @@
 //= require ./imagesloaded.min.js
 //= require ./image_helpers.js
 //= require ./carousel.js
+//= require ./masonry.min.js
+//= require ./grid.js

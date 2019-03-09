@@ -18,7 +18,7 @@ AWS::S3::Base.establish_connection!(
 bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
 bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
 
-%w[/ /portraits /travel /about /contact /pricing].each do |path|
+%w[/ /portraits /travel /children /family /maternity /about /contact /pricing].each do |path|
 	get path do
 		@current_path = path
     case path
@@ -30,7 +30,7 @@ bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
       .map{|img|
         File.join(bucket_url, img.key)}
       if request.xhr?
-        erb :images, locals: {type: :landing}, layout: false
+        erb :images, locals: {type: :carousel}, layout: false
       else
         erb :landing
       end
@@ -43,8 +43,8 @@ bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
     when '/pricing'
       @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/pricing.jpg', bucket.name).key)
       erb :pricing
-    when '/portraits', '/travel'
-      folder = @current_path.match(/portraits|travel/).to_s
+    when '/portraits', '/travel', '/children', '/family', '/maternity'
+      folder = @current_path.match(/portraits|travel|children|family|maternity/).to_s
       @images = bucket.objects(
         max_keys: 6,
         prefix: "#{folder}/",
@@ -52,9 +52,9 @@ bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
       .map{|img|
         File.join(bucket_url, img.key)}
       if request.xhr?
-        erb :images, locals: {type: :carousel}, layout: false
+        erb :images, locals: {type: :grid}, layout: false
       else
-        erb :images, locals: {type: :carousel}
+        erb :images_grid
       end
     end
 	end
