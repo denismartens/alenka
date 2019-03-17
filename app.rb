@@ -23,17 +23,8 @@ bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
 		@current_path = path
     case path
     when '/'
-      @images = bucket.objects(
-        max_keys: 6,
-        prefix: 'landing/',
-        marker: "landing/#{params[:marker]}")
-      .map{|img|
-        File.join(bucket_url, img.key)}
-      if request.xhr?
-        erb :images, locals: {type: :carousel}, layout: false
-      else
-        erb :landing
-      end
+      @carousel_images = bucket.objects(prefix: 'landing/').map{|img| File.join(bucket_url, img.key)}
+      erb :landing
     when '/about'
       @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/about.jpg', bucket.name).key)
       erb :about
@@ -45,15 +36,16 @@ bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
       erb :pricing
     when '/portraits', '/travel', '/children', '/family', '/maternity'
       folder = @current_path.match(/portraits|travel|children|family|maternity/).to_s
-      @images = bucket.objects(
+      @grid_images = bucket.objects(
         max_keys: 6,
-        prefix: "#{folder}/",
-        marker: "#{folder}/#{params[:marker]}")
+        prefix: "#{folder}/thumbnails/",
+        marker: "#{folder}/thumbnails/#{params[:marker]}")
       .map{|img|
         File.join(bucket_url, img.key)}
       if request.xhr?
-        erb :images, locals: {type: :grid}, layout: false
+        erb :images, layout: false
       else
+        @carousel_images = bucket.objects(prefix: "#{folder}/slides/").map{|img| File.join(bucket_url, img.key)}
         erb :images_grid
       end
     end
