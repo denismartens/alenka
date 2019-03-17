@@ -1,10 +1,5 @@
-<% @images.each do |image| %>
-	<% if type == :grid %>
-		<div class='grid-item'>
-			<img src=<%= image %>>
-		</div>
-	<% end %>
-	<% if type == :carousel %>
-		<div class='item carousel-item' data-src=<%= image %>></div>
-	<% end %>
+<% @grid_images.each do |image| %>
+	<div class='grid-item'>
+		<img role='button' src=<%= image %>>
+	</div>
 <% end %>

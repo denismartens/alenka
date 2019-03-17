@@ -1,0 +1,22 @@
+.modal-backdrop {
+  opacity: 1 !important;
+}
+.modal-content {
+  background-color: black;
+}
+.modal-content > button.close {
+  position: absolute;
+  font-size: 3em;
+  top: 1%;
+  right: 1%;
+  color: #ffffff;
+  opacity: 1;
+  z-index: 3;
+}
+.modal-content > button.close:hover {
+  opacity: 1.0;
+}
+.modal-dialog {
+  max-width: 100%;
+  margin: 0;
+}

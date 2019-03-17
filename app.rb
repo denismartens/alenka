@@ -23,7 +23,8 @@ bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
 		@current_path = path
     case path
     when '/'
-      @carousel_images = bucket.objects(prefix: 'landing/').map{|img| File.join(bucket_url, img.key)}
+      @carousel_images = bucket.objects(prefix: 'landing/slides').map{|img| File.join(bucket_url, img.key)}
+      @grid_images = bucket.objects()
       erb :landing
     when '/about'
       @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/about.jpg', bucket.name).key)
@@ -37,7 +38,7 @@ bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
     when '/portraits', '/travel', '/children', '/family', '/maternity'
       folder = @current_path.match(/portraits|travel|children|family|maternity/).to_s
       @grid_images = bucket.objects(
-        max_keys: 6,
+        max_keys: 8,
         prefix: "#{folder}/thumbnails/",
         marker: "#{folder}/thumbnails/#{params[:marker]}")
       .map{|img|

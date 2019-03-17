@@ -1,4 +1,14 @@
 <div class='grid col-md-11 col-sm-12 justify-content-center'>
 	<div class='gutter'></div>
-	<%= erb :images, locals: {type: :grid}, layout: false %>
+	<%= erb :images, layout: false %>
+</div>
+<div class='modal fade' tabindex='-1' role='dialog'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+    	<%= erb :carousel, layout: false %>
+    	<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+    		<span aria-hidden='true'>&times;</span>
+  		</button>
+	  </div>
+  </div>
 </div>

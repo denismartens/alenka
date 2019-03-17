@@ -1,4 +1,4 @@
-<%= erb :carousel, layout: false, locals: {controls: true}%>
+<%= erb :carousel, layout: false %>
 <div class=".col-4 about landing">
 	Alena Martens is a Northern Virginia/Washington D.C. based photographer,<br />specializing in Family, Portrait & Travel Photography.
 </div>
@@ -6,6 +6,6 @@
 	$(document).ready(function() {
 		$all_items = $('.carousel-item');
 		$current_item = $all_items.eq(Math.floor(Math.random() * $all_items.length));
-		loadImage($current_item, initCarousel($current_item));
+		loadHeroItem($current_item, initCarousel($current_item));
 	});
 </script>

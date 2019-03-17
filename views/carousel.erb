@@ -1,15 +1,21 @@
 <div id='carousel' class='carousel slide carousel-fade'>
   <div class='carousel-inner' role='listbox'>
-  	<%= erb :images, locals: {type: :carousel}, layout: false %>
+    <% @carousel_images.each do |image| %>
+      <% if @current_path == '/' %>
+        <div class='item carousel-item' data-src=<%= image %>></div>
+      <% else %>
+        <div class='item carousel-item'>
+          <img class='img-fluid mx-auto d-block' data-src=<%= image %>>
+        </div>
+      <% end %>
+    <% end %>
   </div>
-  <% if controls %>
-	  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Previous</span>
-	  </a>
-	  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Next</span>
-	  </a>
-  <% end %>
+  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
