@@ -15,38 +15,36 @@ AWS::S3::Base.establish_connection!(
   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
 )
 
-bucket = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
-bucket_url = "http://s3.amazonaws.com/#{bucket.name}"
+BUCKET = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
+BUCKET_URL = "http://s3.amazonaws.com/#{BUCKET.name}"
 
 %w[/ /portraits /travel /children /family /maternity /about /contact /pricing].each do |path|
 	get path do
 		@current_path = path
     case path
     when '/'
-      @carousel_images = bucket.objects(prefix: 'landing/slides').map{|img| File.join(bucket_url, img.key)}
-      @grid_images = bucket.objects()
+      @carousel_images = filter_images(BUCKET.objects(prefix: 'landing/slides'))
+      @grid_images = filter_images(BUCKET.objects(prefix: 'landing/thumbnails'))
       erb :landing
     when '/about'
-      @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/about.jpg', bucket.name).key)
+      @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/about.jpg', BUCKET.name).key)
       erb :about
     when '/contact'
-      @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/about.jpg', bucket.name).key)
+      @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/about.jpg', BUCKET.name).key)
       erb :contact
     when '/pricing'
-      @banner_image = File.join(bucket_url, AWS::S3::S3Object.find('banners/pricing.jpg', bucket.name).key)
+      @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/pricing.jpg', BUCKET.name).key)
       erb :pricing
     when '/portraits', '/travel', '/children', '/family', '/maternity'
       folder = @current_path.match(/portraits|travel|children|family|maternity/).to_s
-      @grid_images = bucket.objects(
+      @grid_images = filter_images(BUCKET.objects(
         max_keys: 8,
-        prefix: "#{folder}/thumbnails/",
-        marker: "#{folder}/thumbnails/#{params[:marker]}")
-      .map{|img|
-        File.join(bucket_url, img.key)}
+        prefix: "#{folder}/thumbnails",
+        marker: "#{folder}/thumbnails/#{params[:marker]}"))
       if request.xhr?
         erb :images, layout: false
       else
-        @carousel_images = bucket.objects(prefix: "#{folder}/slides/").map{|img| File.join(bucket_url, img.key)}
+        @carousel_images = filter_images(BUCKET.objects(prefix: "#{folder}/slides"))
         erb :images_grid
       end
     end
@@ -80,4 +78,8 @@ post '/contact' do
     logger.info('failure')
     erb :alert, locals: {notice: 'failure', text: 'Sorry, your message could not be sent.'}, layout: false
   end
+end
+
+def filter_images(s3_objects)
+  return s3_objects.keep_if{|obj| obj.about['content-type'] == 'image/jpeg'}.map{|img| File.join(BUCKET_URL, img.key)}
 end
