@@ -1,7 +1,12 @@
+<div class="brand col-md-8 offset-md-2 text-center">
+  <h1 class="display-5 font-weight-normal">Alena Martens Photography</h1>
+  <p class="lead font-weight-normal">For those who desire beauty</p>
+</div>
 <%= erb :carousel, layout: false %>
-<div class=".col-4 about landing">
+<div class='col-md-11 col-sm-12 landing'>
 	Alena Martens is a Northern Virginia/Washington D.C. based photographer,<br />specializing in Family, Portrait & Travel Photography.
 </div>
+<%= erb :images_grid, layout: false %>
 <script type='text/javascript'>
 	$(document).ready(function() {
 		$all_items = $('.carousel-item');

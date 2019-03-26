@@ -8,7 +8,7 @@
     <link rel='stylesheet' href='assets/app.css'/>
     <script src='assets/app.js'></script>
   </head>
-  <body class='container-fluid'>
+  <body>
     <nav class="navbar navbar-expand-sm navbar-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#thenavbar" aria-controls="thenavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -41,5 +41,12 @@
         </ul>
       </div>
     </nav>
-    <%= yield %>
+    <div class="my-container-fluid" style="<%='padding-top:0 !important;' if @current_path == '/' || @current_path == '/about' || @current_path == '/pricing' || @current_path == '/contact' %>">
+      <%= yield %>
+    </div>
+<!--     <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer> -->
   </body>

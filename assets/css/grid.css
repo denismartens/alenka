@@ -1,17 +1,26 @@
 .grid {
   margin: 0 auto;
   background-color: #ffffff;
-  padding-top: 100px;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 .grid-item {
   display: block;
   height: auto;
-  padding: 0px;
   border: none;
   visibility: hidden;
 }
 .grid-item img {
   max-width: 100%;
+}
+.grid-item > p {
+  position: absolute;
+  margin: 0;
+  font-size: 1.5rem;
+  left: 10%;
+  bottom: 10%;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
 }
 .grid-item:hover {
   opacity: 0.8;
@@ -21,22 +30,33 @@
     width: 90%;
     margin-bottom: 2%;
   }
+  .gutter {
+    width: 2%;
+  }
 }
 @media screen and (min-width: 768px) and (max-width: 991px){
   .grid-item {
-    width: 45%;
-    margin-bottom: 4%;
-  }
-  .gutter {
-    width: 4%;
-  }
-}
-@media screen and (min-width: 992px) {
-  .grid-item {
-    width: 30%;
+    width: 48%;
     margin-bottom: 2%;
+  }
+  .grid {
+    padding-left: 2.5%;
+    padding-right: 2.5%;
   }
   .gutter {
     width: 2%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .grid {
+    padding-left: 3.667%;
+    padding-right: 3.667%;
+  }
+  .grid-item {
+    width: 30%;
+    margin-bottom: 1%;
+  }
+  .gutter {
+    width: 1%;
   }
 }

@@ -6,7 +6,7 @@
 }
 .img-fluid {
   max-height: 100%;
-  padding: 2% 0;
+  margin: auto auto;
 }
 .carousel-control-prev, .carousel-control-next {
   width: 5%;

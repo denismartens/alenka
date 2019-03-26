@@ -10,7 +10,7 @@ function initCarousel($current_item) {
 		$('.modal').modal('show');
 	}
 	$('.carousel-control').each( function() {
-		$(this).find('glyphicon').css('top', $current_item.height() * 0.5 + parseInt($('#carousel').css('padding-top')));
+		$(this).find('glyphicon').css('top', '50%');
 	});
 }
 function hideCarousel() {
