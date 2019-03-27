@@ -1,6 +1,5 @@
 <div class="brand col-md-8 offset-md-2 text-center">
   <h1 class="display-5 font-weight-normal">Alena Martens Photography</h1>
-  <p class="lead font-weight-normal">For those who desire beauty</p>
 </div>
 <%= erb :carousel, layout: false %>
 <div class='col-md-11 col-sm-12 landing'>
@@ -10,7 +9,7 @@
 <script type='text/javascript'>
 	$(document).ready(function() {
 		$all_items = $('.carousel-item');
-		$current_item = $all_items.eq(Math.floor(Math.random() * $all_items.length));
+		$current_item = $all_items.eq(0);
 		loadHeroItem($current_item, initCarousel($current_item));
 	});
 </script>
