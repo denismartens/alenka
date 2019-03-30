@@ -21,6 +21,7 @@ BUCKET_URL = "http://s3.amazonaws.com/#{BUCKET.name}"
 %w[/ /portraits /travel /children /family /maternity /about /contact /pricing].each do |path|
 	get path do
 		@current_path = path
+    @is_portfolio_page = false
     case path
     when '/'
       @carousel_images = filter_images(BUCKET.objects(prefix: 'landing/slides'))
@@ -36,6 +37,7 @@ BUCKET_URL = "http://s3.amazonaws.com/#{BUCKET.name}"
       @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/pricing.jpg', BUCKET.name).key)
       erb :pricing
     when '/portraits', '/travel', '/children', '/family', '/maternity'
+      @is_portfolio_page = true
       folder = @current_path.match(/portraits|travel|children|family|maternity/).to_s
       @grid_images = filter_images(BUCKET.objects(
         max_keys: 8,
