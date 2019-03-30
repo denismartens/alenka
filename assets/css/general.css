@@ -6,6 +6,11 @@
   text-align: center;
   margin: auto;
 }
+@media screen and (max-width: 991px) {
+  .about, .pricing, .contact {
+    padding: 3rem 4rem;
+  }
+}
 .landing {
   font-size: 1.5rem;
   padding: 3rem 4rem;
