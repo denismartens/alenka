@@ -27,10 +27,10 @@ BUCKET_URL = "http://s3.amazonaws.com/#{BUCKET.name}"
       @grid_images = filter_images(BUCKET.objects(prefix: 'landing/thumbnails'))
       erb :landing
     when '/about'
-      @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/about.jpg', BUCKET.name).key)
+      @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/pricing.jpg', BUCKET.name).key)
       erb :about
     when '/contact'
-      @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/about.jpg', BUCKET.name).key)
+      @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/pricing.jpg', BUCKET.name).key)
       erb :contact
     when '/pricing'
       @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/pricing.jpg', BUCKET.name).key)
