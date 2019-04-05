@@ -11,6 +11,11 @@
     padding: 3rem 4rem;
   }
 }
+@media screen and (min-width: 1280px) {
+  .about, .pricing, .contact {
+    max-width: 1140px;
+  }
+}
 .landing {
   font-size: 1.5rem;
   padding: 3rem 4rem;
@@ -52,11 +57,11 @@
   display: table;
   position: relative;
 }
-.my-container-fluid {
-  background-color: #f0f0f0;
+.container-fluid, .container-fluid-outer {
   padding: 0 !important;
   min-height: 100vh;
   padding-top: 60px !important; /* height of the navbar */
+  background-color: #f0f0f0 !important;
 }
 .brand {
   position: absolute;
