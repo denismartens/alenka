@@ -30,7 +30,7 @@ bucket.objects(prefix: options[:path] + '/slides').each do |img|
     end
   end
   # create new thumbnail image and overwrite existing if needed
-	thumbnail_img = MiniMagick::Image.open(File.join(images_dir, img.key)).resize('400')
+	thumbnail_img = MiniMagick::Image.open(File.join(images_dir, img.key)).resize('600')
   AWS::S3::S3Object.store(thumbnail_path, thumbnail_img.to_blob, bucket.name, content_type: 'image/jpeg')
   puts "Created thumbnail #{thumbnail_path} for #{img.key}"
 end

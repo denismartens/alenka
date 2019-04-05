@@ -1,19 +1,21 @@
-<div class='grid col-md-11 col-sm-12 justify-content-center'>
-	<div class='gutter'></div>
-	<%= erb :images, layout: false %>
-</div>
-<% if @current_path != '/' %>
-  <div class='modal fade' tabindex='-1' role='dialog'>
-    <div class='modal-dialog'>
-      <div class='modal-content'>
-      	<%= erb :carousel, layout: false %>
-      	<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-      		<span aria-hidden='true'>&times;</span>
-    		</button>
-  	  </div>
-    </div>
+<div class='grid-outer col-11 mx-auto'>
+  <div class='grid'>
+  	<div class='gutter'></div>
+  	<%= erb :images, layout: false %>
   </div>
-<% end %>
+  <% if @current_path != '/' %>
+    <div class='modal fade' tabindex='-1' role='dialog'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+        	<%= erb :carousel, layout: false %>
+        	<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+        		<span aria-hidden='true'>&times;</span>
+      		</button>
+    	  </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <script type='text/javascript'>
   $(document).ready(function() {
     $('.grid').imagesLoaded().done( function() {
