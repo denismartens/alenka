@@ -6,8 +6,7 @@ function initGrid() {
 		gutter: '.gutter',
 		transitionDuration: '0.7s',
 		percentPosition: true,
-		horizontalOrder: true,
-		containerStyle: null
+		horizontalOrder: true
 	});
 	$('.grid-item').css('visibility', 'visible');
 }
