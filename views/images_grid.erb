@@ -1,9 +1,9 @@
-<div class='grid-outer col-11 mx-auto'>
+<div class='flex-container-90' style="<%= 'margin-top: 62px' if @is_portfolio_page %>">
   <div class='grid'>
   	<div class='gutter'></div>
   	<%= erb :images, layout: false %>
   </div>
-  <% if @current_path != '/' %>
+  <% if @is_portfolio_page %>
     <div class='modal fade' tabindex='-1' role='dialog'>
       <div class='modal-dialog'>
         <div class='modal-content'>
