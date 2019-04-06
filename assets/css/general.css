@@ -42,13 +42,13 @@
   font-size: 1.5rem;
   text-align: center;
 }
-.pricing > h4 {
+.column-container > h4 {
   font-size: 1rem;
   font-weight: bold;
   padding: 0;
   margin: 0;
 }
-.pricing > ul {
+.column-container > ul {
   margin: 0;
   font-size: 0.9rem;
 }
