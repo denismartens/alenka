@@ -29,6 +29,7 @@ BUCKET_URL = "http://s3.amazonaws.com/#{BUCKET.name}"
       erb :landing
     when '/about'
       @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/pricing.jpg', BUCKET.name).key)
+      @headshot_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('about/about.jpg', BUCKET.name).key)
       erb :about
     when '/contact'
       @banner_image = File.join(BUCKET_URL, AWS::S3::S3Object.find('banners/pricing.jpg', BUCKET.name).key)

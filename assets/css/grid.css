@@ -10,7 +10,7 @@
   visibility: hidden;
   max-width: 600px; /* actual image width */
 }
-.grid-item img {
+div > img {
   max-width: 100%;
 }
 .grid-item > p {

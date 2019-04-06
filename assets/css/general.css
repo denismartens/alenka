@@ -12,33 +12,45 @@
 .text-content {
   font-family: 'Helvetica-Light', 'sans-serif';
   font-size: 1rem;
-  padding: 3rem 8rem;
+  margin: 3% 8%;
   text-align: center;
 }
-@media screen and (max-width: 991px) {
-  .text-content {
-    padding: 3rem 3rem;
-    width: 100%;
-  }
+.row-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+}
+.column-container {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  margin: 5% 3% 0;
+
 }
 @media screen and (max-width: 991px) {
   .flex-container-90 {
     width: 100%;
+  }
+  .column-container {
+    flex: 50%;
   }
 }
 .landing {
   font-size: 1.5rem;
   text-align: center;
 }
-.pricing > ul {
-  text-align: justify;
-}
-.pricing h4, .about h4 {
-  font-family: 'Arial';
+.pricing > h4 {
   font-size: 1rem;
   font-weight: bold;
   padding: 0;
   margin: 0;
+}
+.pricing > ul {
+  margin: 0;
+  font-size: 0.9rem;
 }
 .about > p {
   margin-top: 2rem;
@@ -54,6 +66,7 @@
   font-size: 0.75rem;
   font-weight: 900;
   letter-spacing: 0.1rem;
+  margin-top: 1rem;
 }
 .btn-primary:hover {
   background-color: #2da4bf !important;

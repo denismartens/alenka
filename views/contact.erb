@@ -1,17 +1,14 @@
 <div class='banner' style="background-image: url(<%= @banner_image %>)"></div>
-<div class='flex-container-90 text-content contact'>
-	<form>
-	  <div class='form-group'>
-	  	<label for='name'>Name</label>
-  		<input type='text' class='form-control' name='name' placeholder='Your name'>
-  		<br />
-  		<label for='email'>Email</label>
-  		<input type='email' class='form-control' name='email' placeholder='Your email'>
+<div class='flex-container-90 contact'>
+	<form class='text-content'>
+	  	<div class='form-group'>
+	  		<input type='text' class='form-control' name='name' placeholder='Your name'>
+	  		<br />
+	  		<input type='email' class='form-control' name='email' placeholder='Your email'>
 			<br />
-			<label for='message'>Message</label>
-		  <textarea class='form-control' name='message' placeholder='Say hello!' rows='7'></textarea>
+			<textarea class='form-control' name='message' placeholder='Your message' rows='5'></textarea>
 		</div>
-	  <button type='submit' class='btn btn-primary'>Send&nbspMessage</button>
+	  	<button type='submit' class='btn btn-primary'>Send&nbspMessage</button>
 	</form>
 </div>
 <div class='modal fade' id='alertModal' tabindex='-1' role='dialog' aria-labelledby='alertModalLabel'>
