@@ -41,7 +41,7 @@ BUCKET_URL = "http://s3.amazonaws.com/#{BUCKET.name}"
       @is_portfolio_page = true
       folder = @current_path.match(/portraits|travel|children|family|maternity/).to_s
       @grid_images = filter_images(BUCKET.objects(
-        max_keys: 8,
+        max_keys: 16,
         prefix: "#{folder}/thumbnails",
         marker: "#{folder}/thumbnails/#{params[:marker]}"))
       if request.xhr?
