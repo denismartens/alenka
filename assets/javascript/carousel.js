@@ -3,7 +3,8 @@ function initCarousel($current_item) {
 	$current_item.addClass('active');
 	$('#carousel').carousel({
 		interval: 8000,
-		pause: false
+		pause: false,
+		ride: true
 	});
 	$current_item.css('visibility', 'visible');
 	if (window.location.pathname !== '/') {
@@ -28,7 +29,7 @@ $(document).ready(function() {
 	});
 	$('#carousel').on('slid.bs.carousel', function (e) {
 		if (window.location.pathname === '/') {
-			loadHeroImage($(e.relatedTarget));
+			loadHeroItem($(e.relatedTarget));
 		} else {
 			loadCarouselImage($(e.relatedTarget).find('img').eq(0));
 		}
