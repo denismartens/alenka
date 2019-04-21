@@ -5,8 +5,7 @@ function initGrid() {
 		columnWidth: '.grid-item',
 		gutter: '.gutter',
 		transitionDuration: '0.7s',
-		percentPosition: true,
-		horizontalOrder: true
+		percentPosition: true
 	});
 	$('.grid-item').css('visibility', 'visible');
 }
