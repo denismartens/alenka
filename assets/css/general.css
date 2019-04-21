@@ -115,7 +115,7 @@ main {
 .footer > div {
   padding: 1rem 0;
 }
-.footer > div > img {
+.footer > div > a {
   padding: 0 1rem;
 }
 q {
