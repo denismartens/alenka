@@ -102,3 +102,8 @@ main {
 .footer {
   background-color: #000000;
 }
+q {
+  font-style: italic;
+  text-align: center;
+  display: inline-block;
+}
