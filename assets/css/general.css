@@ -104,7 +104,20 @@ main {
   }
 }
 .footer {
-  background-color: #000000;
+  background-color: #ffffff;
+  text-align: center;
+  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
+  font-size: 1rem;
+  font-style: italic;
+  color: #777;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+.footer > div {
+  padding: 1rem 0;
+}
+.footer > div > img {
+  padding: 0 1rem;
 }
 q {
   font-style: italic;
