@@ -10,13 +10,15 @@ function initGrid() {
 	$('.grid-item').css('visibility', 'visible');
 }
 $(document).ready(function() {
-	$(window).scroll(function() {
-		if($(window).scrollTop() + $(window).height() == $(document).height() && window.location.pathname !== '/') {
-			$('.grid').imagesLoaded().done( function() {
-				loadMoreGridImages();
-			})
-		}
-	});
+	if (window.location.pathname !== '/') {
+		$(window).scroll(function() {
+			if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+				$('.grid').imagesLoaded().done( function() {
+					loadMoreGridImages();
+				})
+			}
+		});
+	}
 	$(document).on('click', '.grid-item > img', function() {
 		if (window.location.pathname === '/') {
 			current_img_src = $(this).attr('src');
@@ -24,21 +26,21 @@ $(document).ready(function() {
 		} else {
 			current_img_src = $(this).attr('src').replace('/thumbnails', '/slides');
 			$current_item = $(".carousel-item > img[data-src=\"" + current_img_src + "\"], .carousel-item > img[src=\"" + current_img_src + "\"]").eq(0);
-			loadCarouselImage($current_item, initCarousel($current_item.parent()));
+			loadCarouselImage($current_item, initCarousel($current_item.parent(), false));
+			$('.modal').modal('show');
 		}
 	});
 	$('.modal').on('show.bs.modal', function() {
 		window.location.hash = 'slides';
 		window.onhashchange = function() {
-			if(!location.hash){
+			if (!location.hash) {
 				$('.modal').modal('hide');
 			}
 		}
 	});
 	$(document).bind('keyup', function(e) {
-		if(e.which == 8){
+		if (e.which == 8) {
 			$('.modal').modal('hide');
-			window.location.hash = '';
 		}
 	});
 	$('.modal').on('hidden.bs.modal', function() {

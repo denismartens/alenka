@@ -1,19 +1,21 @@
 .carousel-item {
   background-size: cover;
   background-position: center center;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  visibility: hidden;
+  display: flex !important;
 }
-.img-fluid {
+.my-img-fluid {
   max-height: 100%;
-  margin: auto auto;
+  max-width: 100%;
+  margin: auto;
 }
 .carousel-control-prev, .carousel-control-next {
   width: 5%;
   opacity: 1;
 }
 .carousel-fade .carousel-inner .carousel-item {
-  visibility: hidden;
   opacity: 0;
   transition-property: opacity;
 }

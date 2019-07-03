@@ -1,16 +1,18 @@
-function loadHeroItem($current_item, do_after) {
-	$current_item.css('background-image', 'url(' + $current_item.data('src') + ')');
-	$current_item.removeAttr('data-src');
-	if (typeof do_after !== 'undefined') {
-		$current_item.imagesLoaded().done( function() {
+function loadHeroImage($current_image, do_after) {
+	if ($current_image.css('background-image') === 'none') {
+		$current_image.css('background-image', 'url(' + $current_image.data('src') + ')');
+	}
+	if (do_after !== undefined) {
+		$current_image.imagesLoaded().done( function() {
 			do_after();
 		});
 	}
 }
 function loadCarouselImage($current_image, do_after) {
-	$current_image.attr('src', $current_image.data('src'));
-	$current_image.removeAttr('data-src');
-	if (typeof do_after !== 'undefined') {
+	if ($current_image.attr('src') === undefined) {
+		$current_image.attr('src', $current_image.data('src'));
+	}
+	if (do_after !== undefined) {
 		$current_image.imagesLoaded().done( function() {
 			do_after();
 		});
