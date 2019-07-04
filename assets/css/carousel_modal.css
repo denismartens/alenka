@@ -3,6 +3,7 @@
 }
 .modal-content {
   background-color: black;
+  border: 0;
 }
 .modal-content > button.close {
   position: absolute;

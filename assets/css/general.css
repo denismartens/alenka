@@ -1,4 +1,4 @@
-.flex-container-90 {
+.flex-container {
   /* Allow the content to grow but not shrink */
   flex-grow: 1;
   flex-shrink: 0;
@@ -31,7 +31,7 @@
 
 }
 @media screen and (max-width: 991px) {
-  .flex-container-90 {
+  .flex-container {
     width: 100%;
   }
   .column-container {
@@ -51,6 +51,9 @@
 .column-container > ul {
   margin: 0;
   font-size: 0.9rem;
+}
+.column-container > img {
+  max-width: 100%;
 }
 .about > p {
   margin-top: 2rem;
