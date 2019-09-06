@@ -16,7 +16,7 @@ AWS::S3::Base.establish_connection!(
 )
 
 BUCKET = AWS::S3::Bucket.find(ENV['AWS_BUCKET_NAME'])
-BUCKET_URL = "http://s3.amazonaws.com/#{BUCKET.name}"
+BUCKET_URL = "https://s3.amazonaws.com/#{BUCKET.name}"
 
 %w[/ /portraits /travel /children /family /maternity /about /contact /pricing].each do |path|
 	get path do
