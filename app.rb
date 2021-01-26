@@ -69,8 +69,8 @@ post '/contact' do
         address: 'smtp.sendgrid.net', 
         port: '587',
         domain: 'heroku.com',
-        user_name: ENV['SENDGRID_USERNAME'], 
-        password: ENV['SENDGRID_PASSWORD'], 
+        user_name: 'apikey', 
+        password: ENV['SENDGRID_KEY'], 
         authentication: :plain, 
         enable_starttls_auto: true
 	    }
