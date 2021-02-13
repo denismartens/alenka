@@ -8,9 +8,8 @@
 </div>
 <%= erb :images_grid, layout: false %>
 <script type='text/javascript'>
-	$(document).ready(function() {
-		$all_items = $('.carousel-item');
-		$current_item = $all_items.eq(0);
-		loadHeroImage($current_item, initCarousel($current_item, 5000));
+	window.addEventListener('DOMContentLoaded',function () {
+		const carouselItem = document.querySelector('.carousel-item');
+		loadHeroImage(carouselItem, initCarousel.bind(null, carouselItem, 5000));
 	});
 </script>

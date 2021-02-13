@@ -1,6 +1,6 @@
 <% @grid_images.each do |image| %>
 	<div class='grid-item'>
-		<img role='button' src=<%= image %>>
+		<img role='button' data-src=<%= image %>>
 		<% if @current_path == '/' %>
 			<p><%= File.basename(image, '.jpg').capitalize %></p>
 		<% end %>

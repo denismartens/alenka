@@ -17,9 +17,7 @@
   <% end %>
 </div>
 <script type='text/javascript'>
-  $(document).ready(function() {
-    $('.grid').imagesLoaded().done( function() {
-      initGrid();
-    });
+  window.addEventListener('DOMContentLoaded',function () {
+    initGrid();
   });
 </script>
