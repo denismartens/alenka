@@ -23,7 +23,7 @@ function loadGridItems(grid) {
 		img = gridItem.element.firstElementChild;
 		img.setAttribute('src', img.getAttribute('data-src'));
 	});
-	imagesLoaded(grid, layoutGridItems.bind(null, grid, newGridItems));
+	imagesLoaded(newGridItems, layoutGridItems.bind(null, grid, newGridItems));
 }
 
 function layoutGridItems(grid, gridItems) {
