@@ -1,18 +1,6 @@
-FROM ruby:2.5.3
+FROM nginx:1.19.8-alpine
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
+ENV NGINX_PORT=80
+EXPOSE 80
 
-ENV RACK_ENV=development
-ENV PORT=3000
-EXPOSE 3000
-
-WORKDIR /app
-
-COPY Gemfile Gemfile.lock ./
-RUN bundle install
-
-COPY . .
-
-ENTRYPOINT ["bundle", "exec"]
-CMD ["puma -C puma.rb -p 3000"]
+COPY . /usr/share/nginx/html

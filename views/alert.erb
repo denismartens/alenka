@@ -1,9 +1,0 @@
-<% if notice == 'success'
-	alert_type = 'success'
-elsif notice == 'failure'
-	alert_type = 'danger'
-end %>
-<div class="alert alert-<%=alert_type%> text-center" role='alert'>
-	<%= text %>
-	<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-</div>
