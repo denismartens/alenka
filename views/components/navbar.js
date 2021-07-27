@@ -1,6 +1,5 @@
 let Navbar = {
     render: async () => {
-        let currentPath = window.location.pathname;
         let view =  /*html*/`
             <nav class="navbar navbar-expand-sm navbar-dark">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#thenavbar" aria-controls="thenavbar" aria-expanded="false" aria-label="Toggle navigation">
