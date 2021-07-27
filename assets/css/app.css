@@ -7,7 +7,7 @@
     margin: 0 auto;
     background-color: #ffffff;
 }
-.about, .pricing, .contact {
+.about, .pricing {
     max-width: 1140px;
 }
 .text-content {

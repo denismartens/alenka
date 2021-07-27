@@ -2,7 +2,6 @@
 
 import Home          from './views/home.js'
 import About         from './views/about.js'
-import Contact       from './views/contact.js'
 import Pricing       from './views/pricing.js'
 import Error404      from './views/404.js'
 import PortfolioGrid from './views/portfolio-grid.js'
@@ -17,7 +16,6 @@ import S3Service     from './services/s3.js'
 const routes = {
 	'/'              : Home,
 	'/about'         : About,
-	'/contact'       : Contact,
 	'/pricing'       : Pricing,
 	'/portfolio/:id' : PortfolioGrid,
 };
