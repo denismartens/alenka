@@ -13,14 +13,17 @@ const CarouselService = {
 			closeButton.onclick = CarouselService.hideCarousel.bind(null);
 		}
 		btCarousel.on('slide.bs.carousel', function(e) {
-			if (window.location.hash === '#/') {
+			if (e.currentTarget.id === 'carousel') {
+				return;
+			}
+			if (window.location.hash === '#/' || window.location.hash === '') {
 				CarouselService.loadHeroImage(e.currentTarget);
 			} else {
 				CarouselService.loadCarouselImage(e.currentTarget.firstElementChild);
 			}
 		});
 		btCarousel.on('slid.bs.carousel', function (e) {
-			if (window.location.hash === '#/') {
+			if (window.location.hash === '#/' || window.location.hash === '') {
 				CarouselService.loadHeroImage(e.relatedTarget);
 			} else {
 				CarouselService.loadCarouselImage(e.relatedTarget.firstElementChild);
