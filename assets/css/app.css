@@ -211,7 +211,7 @@ button.navbar-toggler {
 }
 /*= link "bars.svg" */
 .navbar-toggler-icon {
-    background-image: url("bars.svg") !important;
+    background-image: url('../icons/bars.svg') !important;
 }
 
 /* ----- Grid ----- */

@@ -1,4 +1,5 @@
-jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 1500;
+// jquery.fn.carousel.Constructor.TRANSITION_DURATION = 1500;
+import imagesLoaded from '../assets/js/imagesloaded.min.js'
 
 var btCarousel;
 const CarouselService = {

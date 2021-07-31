@@ -1,9 +1,9 @@
-import { BUCKET_URL } from './../../services/s3.js'
+import { BUCKET_URL } from './../services/s3.js'
 
 let About = {
 	render: async () => {
-		let bannerImage = BUCKET_URL.concat('/assets/images/banners/flowers.jpg');
-		let headshotImage = BUCKET_URL.concat('/assets/images/about/about.jpg');
+		let bannerImage = BUCKET_URL.concat('/images/banners/flowers.jpg');
+		let headshotImage = BUCKET_URL.concat('/images/about/about.jpg');
 		let view =  /*html*/`
 			<div class='banner' style="background-image: url(${bannerImage})"></div>
 			<div class='flex-container about'>

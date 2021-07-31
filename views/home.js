@@ -1,11 +1,11 @@
-import S3Service from './../../services/s3.js'
-import CarouselService from './../../services/carousel.js'
-import GridService from './../../services/grid.js'
+import S3Service from './../services/s3.js'
+import CarouselService from './../services/carousel.js'
+import GridService from './../services/grid.js'
 
 let Home = {
 	render: async () => {
-		let carouselImages = await S3Service.listObjects('assets/images/landing/slides/');
-		let gridImages = await S3Service.listObjects('assets/images/landing/thumbnails/');
+		let carouselImages = await S3Service.listObjects('images/landing/slides/');
+		let gridImages = await S3Service.listObjects('images/landing/thumbnails/');
 		let view =  /*html*/`
 			<div class='brand col-md-8 offset-md-2 text-center'>Alena Martens Photography</div>
 			<div id='carousel' class='carousel slide carousel-fade'>

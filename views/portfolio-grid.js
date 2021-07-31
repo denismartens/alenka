@@ -1,13 +1,13 @@
-import Utils       from './../../services/utils.js'
-import S3Service   from './../../services/s3.js'
-import GridService from './../../services/grid.js'
+import Utils       from './../services/utils.js'
+import S3Service   from './../services/s3.js'
+import GridService from './../services/grid.js'
 
 let PortfolioGrid = {
 
 	render: async () => {
 		let request = Utils.parseRequestURL();
-		let gridImages = await S3Service.listObjects('assets/images/'.concat(request.id, '/thumbnails/'));
-		let carouselImages = await S3Service.listObjects('assets/images/'.concat(request.id, '/slides/'));
+		let gridImages = await S3Service.listObjects('images/'.concat(request.id, '/thumbnails/'));
+		let carouselImages = await S3Service.listObjects('images/'.concat(request.id, '/slides/'));
 		let view = /*html*/`
 			<div class='flex-container' style='margin-top: 62px'>
 				<div class='grid'>

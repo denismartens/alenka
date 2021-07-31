@@ -1,3 +1,4 @@
 .git
 create_thumbnails.rb
-Procfile
+dist
+README.md

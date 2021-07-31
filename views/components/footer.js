@@ -1,3 +1,7 @@
+import fb from '../../assets/icons/facebook-24.png';
+import ig from '../../assets/icons/instagram-24.png';
+import ml from '../../assets/icons/mail-24.png';
+
 let Footer = {
     render: async () => {
         let footerClass = window.location.hash.split('/')[1]
@@ -5,17 +9,17 @@ let Footer = {
             <div class='flex-container ${footerClass}'>
                 <div>
                     <a class='footer-link' href='https://www.facebook.com/alenamartensphotography'>
-                        <img src='assets/icons/facebook-24.png'>
+                        <img src=${fb}>
                     </a>
                     <a class='footer-link' href='https://www.instagram.com/alenamartens'>
-                        <img src='assets/icons/instagram-24.png'>
+                        <img src=${ig}>
                     </a>
                     <a class='footer-link' href="#"
                     data-contact="YWxlbmEucGFzdHVzaG9uYWtAZ21haWwuY29t"
                     data-subj="UGhvdG9ncmFwaHkgaW5xdWlyeQ=="
                     onfocus="this.href = 'mailto:' + atob(this.dataset.contact) + '?subject=' + atob(this.dataset.subj || '')"
                     >
-                        <img src='assets/icons/mail-24.png'>
+                        <img src=${ml}>
                     </a>
                 </div>
                 &nbsp

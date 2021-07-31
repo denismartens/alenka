@@ -1,4 +1,6 @@
-import CarouselService from './../../services/carousel.js'
+import Masonry from '../assets/js/masonry.min.js'
+import imagesLoaded from '../assets/js/imagesloaded.min.js'
+import CarouselService from './carousel.js'
 
 // init Masonry
 const GridService = {

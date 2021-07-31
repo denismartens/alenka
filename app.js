@@ -1,9 +1,12 @@
+require('./assets/js/bootstrap.bundle.min.js');
+require('./assets/css/bootstrap.min.css');
+require('./assets/css/app.css');
+
 'use strict';
 
 import Home          from './views/home.js'
 import About         from './views/about.js'
 import Pricing       from './views/pricing.js'
-import Error404      from './views/404.js'
 import PortfolioGrid from './views/portfolio-grid.js'
 
 import Navbar        from './views/components/navbar.js'
