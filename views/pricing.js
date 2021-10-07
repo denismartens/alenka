@@ -1,10 +1,12 @@
-import { BUCKET_URL } from './../services/s3.js'
+import { BUCKET_URL, ResponsiveImage } from './../services/s3.js'
 
-let Pricing = {
+const Pricing = {
 	render: async () => {
-		let bannerImage = BUCKET_URL.concat('/images/banners/flowers.jpg');
-		let view =  /*html*/`
-			<div class='banner' style="background-image: url(${bannerImage})"></div>
+		const bannerImage = new ResponsiveImage(BUCKET_URL.concat('/images/banners/lg/flowers.jpg'));
+		const view =  /*html*/`
+			<div class='banner'>
+				<img class='hero' src='${bannerImage.src}' srcset='${bannerImage.srcset}' sizes='100vw'>
+			</div>
 			<div class='flex-container pricing'>
 				<div class='row-container'>
 					<div class='column-container text-content text-center'>

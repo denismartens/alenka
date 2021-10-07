@@ -6,8 +6,10 @@ Simple photography [portfolio](https://alenamartens.com) for my spouse.
 
     DOCKER_BUILDKIT=1 docker build --force-rm --target webpack-out --output=type=local,dest=./ -f Dockerfile .
 
-# Local Deploy
+   Build container only:
 
-   DOCKER_BUILDKIT=1 docker build --force-rm --target dev -t alenka:latest -f Dockerfile .
-    
+    DOCKER_BUILDKIT=1 docker build --force-rm --target dev -t alenka:latest -f Dockerfile .
+
+   Run container:
+
     docker run --rm -p 3000:80 alenka:latest

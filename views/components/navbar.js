@@ -1,6 +1,6 @@
-let Navbar = {
+const Navbar = {
     render: async () => {
-        let view =  /*html*/`
+        const view =  /*html*/`
             <nav class="navbar navbar-expand-sm navbar-dark">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#thenavbar" aria-controls="thenavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@ let Navbar = {
         return view
     },
     after_render: async () => {
-        let currentPath = window.location.hash;
+        const currentPath = window.location.hash;
         if (currentPath.startsWith('#/portfolio')) {
             document.getElementsByTagName('nav')[0].style.backgroundColor = 'rgb(0,0,0,0.7)';
         }

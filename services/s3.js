@@ -10,10 +10,10 @@ const S3Service = {
 		// 	params: {Bucket: BUCKET_NAME}
 		// });
 	},
-	listObjects: async (prefix) => {
-		let promise = new Promise(function(resolve, reject) {
-			let request = new XMLHttpRequest();
-			let url = BUCKET_URL + '/?list-type=2&prefix=' + prefix + '&encoding-type=url';
+	listImages: async (prefix) => {
+		const promise = new Promise(function(resolve, reject) {
+			const request = new XMLHttpRequest();
+			const url = BUCKET_URL + '/?list-type=2&prefix=' + prefix + '&encoding-type=url';
 			request.open('GET', url);
 			request.responseType = 'document';
 			request.onload = function() {
@@ -33,9 +33,10 @@ const S3Service = {
 		});
 		return promise
 		.then(response => {
-			let images = Array.from(response.getElementsByTagName('Contents'))
-				.filter(c => BigInt(c.querySelector('Size').textContent) > 0)
-				.map(c => BUCKET_URL.concat('/', c.querySelector('Key').textContent))
+			const images = Array.from(response.getElementsByTagName('Contents'))
+				.filter(i => BigInt(i.querySelector('Size').textContent) > 0)
+				.map(i => BUCKET_URL.concat('/', i.querySelector('Key').textContent))
+				.map(i => new ResponsiveImage(i));
 			return images;})
 		.catch(err => {
 			console.log(err);
@@ -50,6 +51,35 @@ const S3Service = {
 		// 	console.log(err);
 		// 	return [];
 		// }
+	},
+	buildImgSrcSet: (name) => {
+		if (name.includes('/lg/')) {
+			return [
+				name.concat(' 2000w'),
+				name.replace('/lg/', '/md/').concat(' 1000w'),
+				name.replace('/lg/', '/sm/').concat(' 800w'),
+				name.replace('/lg/', '/xs/').concat(' 600w')
+			].join(', ');
+		} else if (name.includes('/tl-lg/')) {
+			return [
+				name.concat(' 600w'),
+				name.replace('/tl-lg/', '/tl-md/').concat(' 400w'),
+				name.replace('/tl-lg/', '/tl-sm/').concat(' 200w'),
+				name.replace('/tl-lg/', '/tl-xs/').concat(' 100w')
+			].join(', ');
+		} else {
+			return '';
+		}
+	},
+}
+
+export class ResponsiveImage {
+	constructor(src) {
+		this.src = src;
+		this.srcset = S3Service.buildImgSrcSet(src);
+		const splitPath = src.split('/').reverse();
+		this.basename = splitPath[0];
+		this.category = splitPath[2];
 	}
 }
 

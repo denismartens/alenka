@@ -1,5 +1,4 @@
 // jquery.fn.carousel.Constructor.TRANSITION_DURATION = 1500;
-import imagesLoaded from '../assets/js/imagesloaded.min.js'
 
 var btCarousel;
 const CarouselService = {
@@ -9,7 +8,7 @@ const CarouselService = {
 			interval: interval,
 			wrap: true
 		});
-		let closeButton = document.querySelector('#carousel > button');
+		const closeButton = document.querySelector('#carousel > button');
 		if (closeButton) {
 			closeButton.onclick = CarouselService.hideCarousel.bind(null);
 		}
@@ -17,18 +16,10 @@ const CarouselService = {
 			if (e.currentTarget.id === 'carousel') {
 				return;
 			}
-			if (window.location.hash === '#/' || window.location.hash === '') {
-				CarouselService.loadHeroImage(e.currentTarget);
-			} else {
-				CarouselService.loadCarouselImage(e.currentTarget.firstElementChild);
-			}
+			CarouselService.loadCarouselImage(e.currentTarget.firstElementChild);
 		});
 		btCarousel.on('slid.bs.carousel', function (e) {
-			if (window.location.hash === '#/' || window.location.hash === '') {
-				CarouselService.loadHeroImage(e.relatedTarget);
-			} else {
-				CarouselService.loadCarouselImage(e.relatedTarget.firstElementChild);
-			}
+			CarouselService.loadCarouselImage(e.relatedTarget.firstElementChild);
 		});
 		$(document).bind('keyup', function(e) {
 			if(e.which == 39){
@@ -69,22 +60,17 @@ const CarouselService = {
 	},
 	hideCarousel: () => {
 		btCarousel.carousel('dispose');
-		let element = document.querySelector('.carousel-item.active');
+		const element = document.querySelector('.carousel-item.active');
 		if (element) {
 			element.classList.remove('active');
 		}
 	},
-	loadHeroImage: (currentImage, do_after) => {
-		if (currentImage.style.backgroundImage === '') {
-			currentImage.style.backgroundImage = 'url'.concat('(', currentImage.getAttribute('data-src'), ')');
-		}
-		imagesLoaded(currentImage, do_after);
-	},
 	loadCarouselImage: (currentImage, do_after) => {
 		if (!currentImage.hasAttribute('src')) {
 			currentImage.setAttribute('src', currentImage.getAttribute('data-src'));
+			currentImage.setAttribute('srcset', currentImage.getAttribute('data-srcset'));
 		}
-		imagesLoaded(currentImage, do_after);
+		currentImage.onload = do_after;
 	}
 }
 

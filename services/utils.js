@@ -4,9 +4,9 @@ const Utils = {
 	// --------------------------------
 	parseRequestURL: () => {
 
-		let url = location.hash.slice(1).toLowerCase() || '/';
-		let r = url.split("/")
-		let request = {
+		const url = location.hash.slice(1).toLowerCase() || '/';
+		const r = url.split("/")
+		const request = {
 			resource    : null,
 			id          : null,
 			verb        : null

@@ -76,11 +76,7 @@
 }
 .banner {
     height: 233px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     width: 100%;
-    display: table;
     position: relative;
 }
 main {
@@ -219,6 +215,8 @@ button.navbar-toggler {
     max-width: 1818px;
     width: 100%;
     margin-top: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 .grid-item {
     display: block;
@@ -226,6 +224,11 @@ button.navbar-toggler {
     border: none;
     visibility: hidden;
     max-width: 600px; /* actual image width */
+    width: 30%;
+    margin-bottom: 0.5%;
+}
+.gutter {
+    width: 1%;
 }
 .grid-item > img {
     max-width: 100%;
@@ -242,52 +245,16 @@ button.navbar-toggler {
 .grid-item:hover {
     opacity: 0.8;
 }
-@media screen and (max-width: 991px) {
-    .grid {
-        padding-left: 3.5%;
-        padding-right: 3.5%;
-    }
-    .grid-item {
-        width: 46%;
-        margin-bottom: 1%;
-    }
-    .gutter {
-        width: 1%;
-    }
-}
-@media screen and (min-width: 992px) and (max-width: 2041px) {
-    .grid {
-        padding-left: 4.5%;
-        padding-right: 4.5%;
-    }
-    .grid-item {
-        width: 30%;
-        margin-bottom: 0.5%;
-    }
-    .gutter {
-        width: 0.5%;
-    }
-}
-@media screen and (min-width: 2042px) {
-    .grid {
-        padding-left: auto;
-        padding-right: auto;
-    }
-    .grid-item {
-        width: 600px; /* actual image width */
-        margin-bottom: 9px;
-    }
-    .gutter {
-        width: 9px;
-    }
-}
 
 /* ----- Carousel ----- */
 .carousel-item {
-    background-size: cover;
-    background-position: center center;
     width: 100vw;
     height: 100vh;
+}
+.hero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .my-img-fluid {
     max-height: 100%;

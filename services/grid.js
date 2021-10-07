@@ -1,11 +1,10 @@
 import Masonry from '../assets/js/masonry.min.js'
-import imagesLoaded from '../assets/js/imagesloaded.min.js'
 import CarouselService from './carousel.js'
 
 // init Masonry
 const GridService = {
 	initGrid: () => {
-		let grid = new Masonry( '.grid', {
+		const grid = new Masonry( '.grid', {
 			itemSelector: '.grid-item',
 			columnWidth: '.grid-item',
 			gutter: '.gutter',
@@ -16,20 +15,18 @@ const GridService = {
 		GridService.loadGridItems(grid);
 	},
 	loadGridItems: (grid) => {
-		let newGridItems = grid.items
+		const newGridItems = grid.items
 			.filter(gridItem => !gridItem.element.firstElementChild.hasAttribute('src'))
 			.slice(0, 12);
 		if (newGridItems.length === 0) {
 			return;
 		}
-		let img;
-		newGridItems.forEach(function(gridItem) {
-			img = gridItem.element.firstElementChild;
+		const newGridImages = Array.from(newGridItems).map(i => i.element.firstElementChild);
+		newGridImages.forEach(function(img) {
 			img.setAttribute('src', img.getAttribute('data-src'));
+			img.setAttribute('srcset', img.getAttribute('data-srcset'));
 		});
-		imagesLoaded(
-			newGridItems.map(gridItem => gridItem.element),
-			GridService.layoutGridItems.bind(null, grid, newGridItems));
+		Promise.all(newGridImages.map(img => img.decode())).then(GridService.layoutGridItems.bind(null, grid, newGridItems));
 	},
 	layoutGridItems: (grid, gridItems) => {
 		grid.layout();
@@ -40,12 +37,12 @@ const GridService = {
 		GridService.loadGridItems(grid);
 	},
 	openCarousel: (gridItem) => {
-		if (window.location.hash === '#/') {
+		if (window.location.hash === '#/' || window.location.hash == '') {
 			const currentImgSrc = gridItem.element.firstElementChild.getAttribute('src');
 			// window.location.href = '/' + currentImgSrc.match(RegExp('([^/]+).jpg$'))[1];
 		} else {
-			const currentImgSrc = gridItem.element.firstElementChild.getAttribute('src').replace('/thumbnails', '/slides');
-			const carouselItem = document.querySelector(".carousel-item > img[data-src=\"" + currentImgSrc + "\"], .carousel-item > img[src=\"" + currentImgSrc + "\"]");
+			const imgBasename = gridItem.element.firstElementChild.getAttribute('data-basename');
+			const carouselItem = document.querySelector(".carousel-item > img[data-basename=\"" + imgBasename + "\"]");
 			CarouselService.loadCarouselImage(
 				carouselItem,
 				CarouselService.initCarousel(carouselItem.parentElement, false));

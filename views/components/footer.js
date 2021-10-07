@@ -2,10 +2,10 @@ import fb from '../../assets/icons/facebook-24.png';
 import ig from '../../assets/icons/instagram-24.png';
 import ml from '../../assets/icons/mail-24.png';
 
-let Footer = {
+const Footer = {
     render: async () => {
-        let footerClass = window.location.hash.split('/')[1]
-        let view =  /*html*/`
+        const footerClass = window.location.hash.split('/')[1]
+        const view =  /*html*/`
             <div class='flex-container ${footerClass}'>
                 <div>
                     <a class='footer-link' href='https://www.facebook.com/alenamartensphotography'>

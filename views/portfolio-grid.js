@@ -1,20 +1,19 @@
-import Utils       from './../services/utils.js'
-import S3Service   from './../services/s3.js'
 import GridService from './../services/grid.js'
+import S3Service   from './../services/s3.js'
+import Utils       from './../services/utils.js'
 
-let PortfolioGrid = {
-
+const PortfolioGrid = {
 	render: async () => {
-		let request = Utils.parseRequestURL();
-		let gridImages = await S3Service.listObjects('images/'.concat(request.id, '/thumbnails/'));
-		let carouselImages = await S3Service.listObjects('images/'.concat(request.id, '/slides/'));
-		let view = /*html*/`
+		const request = Utils.parseRequestURL();
+		const thumbnails = await S3Service.listImages('images/'.concat(request.id, '/tl-lg/'));
+		const images = await S3Service.listImages('images/'.concat(request.id, '/lg/'));
+		const view = /*html*/`
 			<div class='flex-container' style='margin-top: 62px'>
 				<div class='grid'>
 					<div class='gutter'></div>
-						${gridImages.map((image, i) => `
+						${thumbnails.map((tl) => `
 							<div class='grid-item'>
-								<img role='button' data-src=${image}>
+								<img role='button' data-src='${tl.src}' data-srcset='${tl.srcset}' data-basename='${tl.basename}' sizes='30vw'>
 							</div>
 						`.trim()).join('')}
 					</div>
@@ -24,9 +23,9 @@ let PortfolioGrid = {
 						<div class='modal-content'>
 							<div id='carousel' class='carousel slide carousel-fade'>
 								<div class='carousel-inner' role='listbox'>
-									${carouselImages.map((image, i) => `
+									${images.map((img) => `
 										<div class='item carousel-item'>
-											<img class='my-img-fluid d-block' data-src=${image}>
+											<img class='my-img-fluid d-block' data-src='${img.src}' data-srcset='${img.srcset}' data-basename='${img.basename}' sizes='100vw'>
 										</div>
 									`.trim()).join('')}
 								</div>
