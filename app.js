@@ -44,9 +44,11 @@ const router = async () => {
 
 	let page = routes[parsedURL] ? routes[parsedURL] : Error404;
 	content.innerHTML = await page.render();
-	await page.after_render();
+	await page.after_render(request.id);
 }
 
-window.addEventListener('hashchange', router);
+window.addEventListener('hashchange', () => {
+	window.scrollTo(0, 0);
+	router();
+});
 window.addEventListener('load', router);
-window.addEventListener('load', S3Service.init());

@@ -1,11 +1,9 @@
-import { BUCKET_URL, ResponsiveImage } from './../services/s3.js'
+import S3Service from './../services/s3.js'
 
 const Pricing = {
 	render: async () => {
-		const bannerImage = new ResponsiveImage(BUCKET_URL.concat('/images/banners/lg/flowers.jpg'));
 		const view =  /*html*/`
 			<div class='banner'>
-				<img class='hero' src='${bannerImage.src}' srcset='${bannerImage.srcset}' sizes='100vw'>
 			</div>
 			<div class='flex-container pricing'>
 				<div class='row-container'>
@@ -44,7 +42,12 @@ const Pricing = {
 		`
 		return view
 	},
-	after_render: async () => {}
+	after_render: async (id) => {
+		const bannerImage = await S3Service.loadImage('images/banners/lg/flowers.jpg');
+		bannerImage.sizes = '100vw';
+		const banner = document.querySelector('.banner');
+		banner.appendChild(bannerImage);
+	}
 }
 
 export default Pricing;

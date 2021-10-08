@@ -14,11 +14,10 @@ const Footer = {
                     <a class='footer-link' href='https://www.instagram.com/alenamartens'>
                         <img src=${ig}>
                     </a>
-                    <a class='footer-link' href="#"
-                    data-contact="YWxlbmEucGFzdHVzaG9uYWtAZ21haWwuY29t"
-                    data-subj="UGhvdG9ncmFwaHkgaW5xdWlyeQ=="
-                    onfocus="this.href = 'mailto:' + atob(this.dataset.contact) + '?subject=' + atob(this.dataset.subj || '')"
-                    >
+                    <a class='footer-link' href='#'
+                    data-contact='YWxlbmEucGFzdHVzaG9uYWtAZ21haWwuY29t'
+                    data-subj='UGhvdG9ncmFwaHkgaW5xdWlyeQ=='
+                    onfocus="this.href = 'mailto:' + atob(this.dataset.contact) + '?subject=' + atob(this.dataset.subj || '')">
                         <img src=${ml}>
                     </a>
                 </div>

@@ -79,6 +79,11 @@
     width: 100%;
     position: relative;
 }
+.banner > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 main {
     /* make sure we use the full width but allow for more height */
     width: 100%;
@@ -197,22 +202,15 @@ li.nav-item {
 li.nav-item > a:hover, a.dropdown-item:hover {
     color: #34b9d7 !important;
 }
-li.nav-item > a.active, a.dropdown-item:hover {
-    color: #34b9d7 !important;
-}
 button.navbar-toggler {
     width: 100%;
     border: none;
     outline: none;
 }
-/*= link "bars.svg" */
-.navbar-toggler-icon {
-    background-image: url('../icons/bars.svg') !important;
-}
 
 /* ----- Grid ----- */
 .grid {
-    max-width: 1818px;
+    max-width: 2000px;
     width: 100%;
     margin-top: 4%;
     padding-left: 4%;
@@ -222,7 +220,6 @@ button.navbar-toggler {
     display: block;
     height: auto;
     border: none;
-    visibility: hidden;
     max-width: 600px; /* actual image width */
     width: 30%;
     margin-bottom: 0.5%;
@@ -247,19 +244,18 @@ button.navbar-toggler {
 }
 
 /* ----- Carousel ----- */
-.carousel-item {
-    width: 100vw;
+#carousel {
+    width:  100vw;
     height: 100vh;
 }
-.hero {
+.carousel-inner, .carousel-item {
+    width: 100%;
+    height: 100%;
+}
+.carousel-item > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-.my-img-fluid {
-    max-height: 100%;
-    max-width: 100%;
-    margin: auto;
 }
 .carousel-control-prev, .carousel-control-next {
     width: 5%;
@@ -320,24 +316,31 @@ button.navbar-toggler {
     -o-transition: 1.5s ease-in-out left;
     transition: 1.5s ease-in-out left;
 }
-/* ----- Carousel Modal ----- */
+/* ----- Image Modal ----- */
 .modal-backdrop {
     opacity: 1 !important;
 }
 .modal-content {
     background-color: black;
     border: none;
+    width: 100vw;
+    height: 100vh;
 }
-.carousel > button.close {
+.modal-content > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.modal-content > button.close {
     position: absolute;
-    font-size: 3em;
+    font-size: 2em;
     top: 1%;
     right: 1%;
-    color: #ffffff;
-    opacity: 1;
+    color: #f0f0f0;
+    opacity: 0.5;
     z-index: 3;
 }
-.carousel > button.close:hover {
+.modal-content > button.close:hover {
     opacity: 1.0;
 }
 .modal-dialog {

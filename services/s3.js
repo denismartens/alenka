@@ -1,4 +1,4 @@
-export const BUCKET_URL = 'https://s3.amazonaws.com/www.alenamartens.com';
+export const BUCKET_URL = 'https://s3.amazonaws.com/www.alenamartens.com/';
 
 const S3Service = {
 	init: () => {
@@ -10,10 +10,11 @@ const S3Service = {
 		// 	params: {Bucket: BUCKET_NAME}
 		// });
 	},
-	listImages: async (prefix) => {
+	listImages: async (prefix, marker='', maxKeys=1000) => {
 		const promise = new Promise(function(resolve, reject) {
 			const request = new XMLHttpRequest();
-			const url = BUCKET_URL + '/?list-type=2&prefix=' + prefix + '&encoding-type=url';
+			const url = BUCKET_URL.concat(
+				'?prefix=',prefix,'&encoding-type=url','&marker=',marker,'&max-keys=',maxKeys);
 			request.open('GET', url);
 			request.responseType = 'document';
 			request.onload = function() {
@@ -33,24 +34,34 @@ const S3Service = {
 		});
 		return promise
 		.then(response => {
-			const images = Array.from(response.getElementsByTagName('Contents'))
+			const keys = Array.from(response.getElementsByTagName('Contents'))
 				.filter(i => BigInt(i.querySelector('Size').textContent) > 0)
-				.map(i => BUCKET_URL.concat('/', i.querySelector('Key').textContent))
-				.map(i => new ResponsiveImage(i));
-			return images;})
+				.map(i => BUCKET_URL.concat(i. querySelector('Key').textContent));
+			return keys;
+		})
 		.catch(err => {
 			console.log(err);
-			return [];})
-		// const params = {Prefix: prefix, EncodingType: 'url', Delimiter: '/'};
-		// try {
-		// 	const data = await s3.listObjectsV2(params).promise();
-		// 	return data.Contents
-		// 		.filter(obj => obj.Size > 0)
-		// 		.map(obj => BUCKET_URL.concat('/', obj.Key));
-		// } catch (err) {
-		// 	console.log(err);
-		// 	return [];
-		// }
+			return [];
+		});
+	},
+	loadImages: async (prefix, marker='', maxKeys=1000, sizes='100vw') => {
+		return S3Service.listImages(prefix, marker, maxKeys)
+		.then(keys => {
+			const images = keys.map(src => S3Service.createImageElement(src, sizes));
+			return Promise.allSettled(images.map(img => img.decode()))
+			.then(() => {
+				return images;
+			})
+			.catch(err => {
+				console.log(err);
+				return [];
+			});
+		});
+	},
+	loadImage: async (src, sizes='100vw') => {
+		const img = S3Service.createImageElement(src, sizes)
+		await img.decode();
+		return img;
 	},
 	buildImgSrcSet: (name) => {
 		if (name.includes('/lg/')) {
@@ -71,15 +82,19 @@ const S3Service = {
 			return '';
 		}
 	},
-}
-
-export class ResponsiveImage {
-	constructor(src) {
-		this.src = src;
-		this.srcset = S3Service.buildImgSrcSet(src);
+	createImageElement: (src, sizes='100vw') => {
+		const img = new Image();
+		if (!src.startsWith(BUCKET_URL)) {
+			src = BUCKET_URL.concat(src);
+		}
+		img.srcset = S3Service.buildImgSrcSet(src);
+		img.src = src;
+		img.sizes = sizes;
 		const splitPath = src.split('/').reverse();
-		this.basename = splitPath[0];
-		this.category = splitPath[2];
+		img.dataset.basename = splitPath[0];
+		img.dataset.prefix = src.replace(BUCKET_URL, '').replace(splitPath[0], '');
+		img.dataset.portfolio = img.dataset.prefix.split('/')[1];
+		return img;
 	}
 }
 

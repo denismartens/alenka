@@ -1,76 +1,61 @@
-// jquery.fn.carousel.Constructor.TRANSITION_DURATION = 1500;
+import S3Service from './../services/s3.js'
 
-var btCarousel;
+var carousel;
 const CarouselService = {
-	initCarousel: (currentItem, interval) => {
-		currentItem.classList.add('active');
-		btCarousel = $('#carousel').carousel({
-			interval: interval,
+	initCarousel: (firstImages) => {
+		CarouselService.appendImages(firstImages);
+		document.querySelector('.carousel-item').classList.add('active');
+		carousel = $('#carousel').carousel({
+			interval: 10000,
 			wrap: true
 		});
-		const closeButton = document.querySelector('#carousel > button');
-		if (closeButton) {
-			closeButton.onclick = CarouselService.hideCarousel.bind(null);
-		}
-		btCarousel.on('slide.bs.carousel', function(e) {
-			if (e.currentTarget.id === 'carousel') {
-				return;
-			}
-			CarouselService.loadCarouselImage(e.currentTarget.firstElementChild);
-		});
-		btCarousel.on('slid.bs.carousel', function (e) {
-			CarouselService.loadCarouselImage(e.relatedTarget.firstElementChild);
-		});
-		$(document).bind('keyup', function(e) {
-			if(e.which == 39){
-				btCarousel.carousel('next');
-			} else if(e.which == 37){
-				btCarousel.carousel('prev');
+		CarouselService.loadNextImages();
+		carousel.on('slid.bs.carousel', async (e) => {
+			if (e.relatedTarget.isSameNode(
+					document.querySelector('.carousel-item:last-child'))) {
+				CarouselService.loadNextImages();
 			}
 		});
-
 		window.addEventListener('keyup', function (event) {
 			if (event.defaultPrevented) {
 				return; // Do nothing if the event was already processed
 			}
-
 			switch (event.key) {
 				case 'Left': // IE/Edge specific value
 				case 'ArrowLeft':
-					btCarousel.carousel('prev');
+					carousel.carousel('prev');
 					break;
 				case 'Right': // IE/Edge specific value
 				case 'ArrowRight':
-					btCarousel.carousel('next');
-					break;
-				case 'Esc': // IE/Edge specific value
-				case 'Escape':
-					if (window.location.hash.startsWith('#/portfolio')) {
-						$('.modal').modal('hide');
-						CarouselService.hideCarousel();
-					}
+					carousel.carousel('next');
 					break;
 				default:
-					return; // Quit when this doesn't handle the key event.
+					return;
 			}
-
 		  // Cancel the default action to avoid it being handled twice
 		  event.preventDefault();
 		}, true);
 	},
-	hideCarousel: () => {
-		btCarousel.carousel('dispose');
-		const element = document.querySelector('.carousel-item.active');
-		if (element) {
-			element.classList.remove('active');
+	loadNextImages: async () => {
+		const lastImg = document.querySelector('.carousel-item:last-child > img');
+		const newImages = await S3Service.loadImages(
+			lastImg.dataset.prefix,
+			lastImg.dataset.prefix.concat(lastImg.dataset.basename),
+			1);
+		if (newImages.length === 0) {
+			console.log('no more images');
+			return;
 		}
+		CarouselService.appendImages(newImages);
 	},
-	loadCarouselImage: (currentImage, do_after) => {
-		if (!currentImage.hasAttribute('src')) {
-			currentImage.setAttribute('src', currentImage.getAttribute('data-src'));
-			currentImage.setAttribute('srcset', currentImage.getAttribute('data-srcset'));
-		}
-		currentImage.onload = do_after;
+	appendImages: (images) => {
+		const parent = document.querySelector('.carousel-inner');
+		images.forEach(img => {
+			const carouselItem = document.createElement('div');
+			carouselItem.className = 'carousel-item';
+			carouselItem.appendChild(img);
+			parent.appendChild(carouselItem);
+		})
 	}
 }
 
